@@ -1,0 +1,187 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1472311238228640336
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 135371565677595332, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: _animations.Array.data[0].sourceClip
+      value: 
+      objectReference: {fileID: 7400000, guid: 97919b92230d96f4d9c3731a17bd7b0d, type: 2}
+    - target: {fileID: 135371565677595332, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: _animations.Array.data[0].frames.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 2259921701558317074, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 135371565677595332, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: _animations.Array.data[0].frames.Array.data[1].sprite
+      value: 
+      objectReference: {fileID: 7984115950042476133, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 135371565677595332, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: _animations.Array.data[0].frames.Array.data[2].sprite
+      value: 
+      objectReference: {fileID: 3578822551802676324, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 135371565677595332, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: _animations.Array.data[0].frames.Array.data[3].sprite
+      value: 
+      objectReference: {fileID: -3695335303022376874, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 135371565677595332, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: _animations.Array.data[0].frames.Array.data[4].sprite
+      value: 
+      objectReference: {fileID: -3695335303022376874, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 1161752492829868568, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.priority
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161752492829868568, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.sourceClip
+      value: 
+      objectReference: {fileID: 7400000, guid: 8e7ff181c17dfd242b7c18b0d64f8ccf, type: 2}
+    - target: {fileID: 1161752492829868568, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: -6081762724776319049, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 1161752492829868568, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[1].sprite
+      value: 
+      objectReference: {fileID: 4527034861993591041, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 1161752492829868568, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[2].sprite
+      value: 
+      objectReference: {fileID: -3050301872929709158, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 1161752492829868568, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[3].sprite
+      value: 
+      objectReference: {fileID: 2070210542672066076, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 1161752492829868568, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[4].sprite
+      value: 
+      objectReference: {fileID: 2070210542672066076, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 2131228628853059147, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.priority
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131228628853059147, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.sourceClip
+      value: 
+      objectReference: {fileID: 7400000, guid: 1caa094fccc266d4da0186c595c7971b, type: 2}
+    - target: {fileID: 2131228628853059147, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 8046266444824693671, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 2131228628853059147, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[1].sprite
+      value: 
+      objectReference: {fileID: -9133970963925905274, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 2131228628853059147, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[2].sprite
+      value: 
+      objectReference: {fileID: -873848631969117203, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 2131228628853059147, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[3].sprite
+      value: 
+      objectReference: {fileID: 637159376225707730, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 2131228628853059147, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[4].sprite
+      value: 
+      objectReference: {fileID: 637159376225707730, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 3849484805872490811, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849484805872490811, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.priority
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849484805872490811, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.sourceClip
+      value: 
+      objectReference: {fileID: 7400000, guid: 8a35d2a61beab2c4595c7839ac7a0da8, type: 2}
+    - target: {fileID: 3849484805872490811, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: -7235420405279500322, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 3849484805872490811, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[1].sprite
+      value: 
+      objectReference: {fileID: -4286749563877829624, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 3849484805872490811, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[2].sprite
+      value: 
+      objectReference: {fileID: -1970674317417552575, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 3849484805872490811, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[3].sprite
+      value: 
+      objectReference: {fileID: -5897075618306287389, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 3849484805872490811, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[4].sprite
+      value: 
+      objectReference: {fileID: -5897075618306287389, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 4249537301698441268, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249537301698441268, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249537301698441268, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249537301698441268, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249537301698441268, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249537301698441268, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249537301698441268, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249537301698441268, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249537301698441268, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249537301698441268, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6226244487611543048, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6226244487611543048, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6226244487611543048, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2259921701558317074, guid: cf481584254ae554b9846a1232fd86c5, type: 3}
+    - target: {fileID: 6226244487611543048, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6758079747134627487, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: m_Name
+      value: Player Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8d456c932e139164a931f7fc902ff678, type: 3}

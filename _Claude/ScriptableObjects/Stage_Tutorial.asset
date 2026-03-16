@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c1e8f45982345b41b37bdd37c823640, type: 3}
+  m_Name: Stage_Tutorial
+  m_EditorClassIdentifier: Assembly-CSharp::StageData
+  stageName: "\u30C1\u30E5\u30FC\u30C8\u30EA\u30A2\u30EB"
+  initialMoney: 1500
+  availableMenuItems:
+  - {fileID: 11400000, guid: 77d7165b39180564c9cadac05d23f7e6, type: 2}
+  - {fileID: 11400000, guid: 8c9c55a2a80a00c4db18c0b322c03db1, type: 2}
+  - {fileID: 11400000, guid: da78ab345c55771428eaee99530b0d3d, type: 2}
+  - {fileID: 11400000, guid: 2f656d35a6ce7364aa5274da087e4681, type: 2}
+  - {fileID: 11400000, guid: aaedf0d15cae1774aa825e63ca97692e, type: 2}
+  - {fileID: 11400000, guid: f2cabce3222e6ce41a7e16845d684088, type: 2}
+  normaConditions:
+  - "order:\u713C\u304D\u9B5A\u5B9A\u98DF"
+  - "comment:\u3046\u307E\u3044"
+  dobonEntries:
+  - conditionId: "order:\u30AB\u30EC\u30FC"
+    penalty: 500
+  customers:
+  - {fileID: 11400000, guid: abdc8934c69a6fe45afac1ca33b6af70, type: 2}
+  availableComments:
+  - "\u3046\u307E\u3044"
+  - "\u91CF\u304C\u591A\u3044"
+  - "\u307E\u305F\u6765\u308B"
+  - "\u307E\u305A\u3044"

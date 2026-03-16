@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c45f88b6d4fe8c646852ec24efc093c1, type: 3}
+  m_Name: "MenuItem_\u713C\u304D\u9B5A\u5B9A\u98DF"
+  m_EditorClassIdentifier: Assembly-CSharp::MenuItemData
+  itemName: "\u713C\u304D\u9B5A\u5B9A\u98DF"
+  price: 300
+  isSecretMenu: 0

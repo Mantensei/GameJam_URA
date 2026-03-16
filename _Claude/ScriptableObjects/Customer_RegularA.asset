@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c462952ee64e9664c9f6e62ae87760cc, type: 3}
+  m_Name: Customer_RegularA
+  m_EditorClassIdentifier: Assembly-CSharp::CustomerTimelineData
+  customerName: "\u5E38\u9023A"
+  isRegular: 1
+  orderItems:
+  - {fileID: 11400000, guid: 77d7165b39180564c9cadac05d23f7e6, type: 2}
+  - {fileID: 11400000, guid: 2f656d35a6ce7364aa5274da087e4681, type: 2}
+  - {fileID: 11400000, guid: f2cabce3222e6ce41a7e16845d684088, type: 2}
+  comment: "\u3046\u307E\u3044"
+  timings:
+    enterToSit: 2
+    sitToOrder: 3
+    orderToEat: 5
+    eatToComment: 4
+    commentToWhisper: 2
+    whisperToLeave: 2
