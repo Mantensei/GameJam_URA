@@ -1,0 +1,29 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="CommentPopup.uss" />
+
+    <ui:VisualElement name="comment-overlay" class="popup-overlay">
+        <ui:VisualElement name="comment-popup" class="popup-box">
+            <ui:VisualElement name="comment-book">
+                <ui:VisualElement name="comment-cover-left" class="comment-cover" />
+                <ui:VisualElement name="comment-pages">
+                    <ui:Label name="comment-title" text="感想" class="popup-title" />
+                    <ui:VisualElement name="comment-body">
+                        <ui:VisualElement name="comment-character">
+                            <ui:VisualElement name="comment-silhouette" />
+                        </ui:VisualElement>
+                        <ui:VisualElement name="comment-content">
+                            <ui:VisualElement class="popup-list">
+                                <ui:Label class="popup-list-item-label" text="・おいしい" />
+                                <ui:Label class="popup-list-item-label" text="・マズい" />
+                                <ui:Label class="popup-list-item-label" text="・量が多い" />
+                                <ui:Label class="popup-list-item-label" text="・写真いいですか？" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:Label name="comment-close-btn" text="閉じる(Escape)" class="popup-close-btn" />
+                </ui:VisualElement>
+                <ui:VisualElement name="comment-cover-right" class="comment-cover" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,3 +1,7 @@
+* {
+    -unity-font: url("project://database/Assets/MantenseiAssets/Fonts/MaruMinya/x12y12pxMaruMinya.ttf");
+}
+
 #game-hud {
     flex-grow: 1;
     justify-content: space-between;
