@@ -1,0 +1,43 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEditor.UIElements">
+    <ui:Template name="GameHUD" />
+    <Style src="GameHUD.uss" />
+
+    <ui:VisualElement name="game-hud" picking-mode="Ignore">
+
+        <ui:VisualElement name="top-bar">
+            <ui:Label name="money" text="¥3000" />
+            <ui:Label name="stage" text="Stage-1" />
+            <ui:VisualElement name="progress-bar">
+                <ui:VisualElement name="progress-fill" />
+            </ui:VisualElement>
+            <ui:VisualElement name="menu-btn">
+                <ui:VisualElement class="menu-line" />
+                <ui:VisualElement class="menu-line" />
+                <ui:VisualElement class="menu-line" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="bottom-bar">
+            <ui:VisualElement name="key-guides">
+                <ui:VisualElement class="key-guide">
+                    <ui:Label class="key-label" text="(A)" />
+                    <ui:Label class="key-icon" text="←" />
+                </ui:VisualElement>
+                <ui:VisualElement class="key-guide">
+                    <ui:Label class="key-label" text="(D)" />
+                    <ui:Label class="key-icon" text="→" />
+                </ui:VisualElement>
+                <ui:VisualElement class="key-guide">
+                    <ui:Label class="key-label" text="(T)" />
+                    <ui:Label class="key-icon" text="💬" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="action-btn">
+                <ui:Label class="key-label" text="(Enter)" />
+                <ui:Label class="action-text" text="話しかける" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+</ui:UXML>

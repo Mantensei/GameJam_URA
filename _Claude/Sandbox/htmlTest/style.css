@@ -1,0 +1,247 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#app {
+    width: 480px;
+    height: 270px;
+    background: #000;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transform-origin: center center;
+    font-family: sans-serif;
+}
+
+#top-bar {
+    height: 28px;
+    background: #f5f5f0;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    gap: 12px;
+    border-bottom: 2px solid #333;
+}
+
+#money {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#stage {
+    font-size: 10px;
+}
+
+#progress-bar {
+    width: 80px;
+    height: 12px;
+    background: #fff;
+    border: 2px solid #333;
+}
+
+#progress-fill {
+    width: 40%;
+    height: 100%;
+    background: #333;
+}
+
+#menu-btn {
+    margin-left: auto;
+    width: 28px;
+    height: 22px;
+    background: #f5f5f0;
+    border: 2px solid #333;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 3px 4px;
+}
+
+#menu-btn span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #333;
+}
+
+#game-area {
+    flex: 1;
+    background: #00ff00;
+}
+
+#bottom-bar {
+    height: 40px;
+    background: #e8e8e0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    border-top: 2px solid #333;
+}
+
+#key-guides {
+    display: flex;
+    gap: 4px;
+}
+
+.key-guide {
+    width: 40px;
+    height: 32px;
+    border: 2px solid #333;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.key-guide .key-label {
+    font-size: 7px;
+    line-height: 1;
+}
+
+.key-guide .key-icon {
+    font-size: 10px;
+    line-height: 1;
+}
+
+#action-btn {
+    height: 32px;
+    padding: 0 10px;
+    border: 2px solid #333;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+#action-btn .key-label {
+    font-size: 7px;
+    color: #555;
+}
+
+#action-btn .action-text {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+#menu-overlay {
+    position: absolute;
+    top: 28px;
+    left: 0;
+    width: 100%;
+    bottom: 40px;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#menu-popup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+#menu-book {
+    display: flex;
+    width: 285px;
+    height: 170px;
+}
+
+.menu-cover {
+    width: 16px;
+    background: #6b4226;
+    border: 1px solid #4a2e18;
+}
+
+.menu-cover-left {
+    border-radius: 4px 0 0 4px;
+}
+
+.menu-cover-right {
+    border-radius: 0 4px 4px 0;
+}
+
+.menu-pages {
+    flex: 1;
+    background: #faf5e8;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-title {
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    letter-spacing: 6px;
+}
+
+.menu-columns {
+    flex: 1;
+    display: flex;
+    gap: 0;
+}
+
+.menu-list {
+    flex: 1;
+    list-style: none;
+    padding: 0 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.menu-list li {
+    font-size: 7px;
+    display: flex;
+    align-items: baseline;
+    white-space: nowrap;
+}
+
+.menu-list li::before {
+    content: "\30FB";
+    flex-shrink: 0;
+}
+
+.menu-item-name {
+    flex-shrink: 0;
+}
+
+.menu-item-price {
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.menu-divider {
+    width: 1px;
+    background: #999;
+}
+
+#menu-close-btn {
+    margin-top: auto;
+    align-self: flex-end;
+    height: 18px;
+    padding: 0 8px;
+    font-size: 7px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #555;
+}

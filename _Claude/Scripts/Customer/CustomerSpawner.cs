@@ -21,6 +21,9 @@ namespace GameJam_URA.Prototype
             eavesdrop = FindAnyObjectByType<EavesdropSystem>();
 
             GameManager.Instance.OnStateChanged += OnStateChanged;
+
+            if (GameManager.Instance.State == GameState.Visiting)
+                SpawnCustomers();
         }
 
         void OnDestroy()
@@ -40,6 +43,9 @@ namespace GameJam_URA.Prototype
             ClearCustomers();
 
             var customers = GameManager.Instance.CurrentStage.Customers;
+#if UNITY_EDITOR
+            MantenseiLib.Editor.DebugFileLogger.Log("gameplay", "Spawner", "SpawnCustomers count=" + customers.Length + " seats=" + seats.Length);
+#endif
 
             for (int i = 0; i < customers.Length; i++)
             {
@@ -48,6 +54,9 @@ namespace GameJam_URA.Prototype
 
                 var ai = go.GetComponentInChildren<CustomerAI>();
                 Seat seat = seats[i % seats.Length];
+#if UNITY_EDITOR
+                MantenseiLib.Editor.DebugFileLogger.Log("gameplay", "Spawner", "Spawn: " + customers[i].CustomerName + " → " + seat.gameObject.name);
+#endif
                 ai.Initialize(customers[i], seat, transform, shopkeeperPoint);
 
                 if (eavesdrop != null)

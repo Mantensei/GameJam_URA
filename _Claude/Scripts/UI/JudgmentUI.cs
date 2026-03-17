@@ -8,14 +8,21 @@ namespace GameJam_URA.Prototype
     public class JudgmentUI : MonoBehaviour
     {
         [SerializeField] GameObject judgmentPanel;
-        [SerializeField] TMP_Text resultText;
-        [SerializeField] TMP_Text detailText;
         [SerializeField] Button continueButton;
 
+        TMP_Text resultText;
+        TMP_Text detailText;
         bool lastCleared;
 
         void Start()
         {
+            var texts = judgmentPanel.GetComponentsInChildren<TMP_Text>(true);
+            if (texts.Length >= 2)
+            {
+                resultText = texts[0];
+                detailText = texts[1];
+            }
+
             judgmentPanel.SetActive(false);
             if (continueButton != null)
                 continueButton.onClick.AddListener(OnContinue);

@@ -33,6 +33,10 @@ namespace GameJam_URA.Prototype
 
         void Start()
         {
+#if UNITY_EDITOR
+            MantenseiLib.Editor.DebugFileLogger.Clear("gameplay");
+            MantenseiLib.Editor.DebugFileLogger.Log("gameplay", "GM", "Start");
+#endif
             InitializeStage();
         }
 
@@ -45,6 +49,9 @@ namespace GameJam_URA.Prototype
         public void InitializeStage()
         {
             money = currentStage.InitialMoney;
+#if UNITY_EDITOR
+            MantenseiLib.Editor.DebugFileLogger.Log("gameplay", "GM", "InitializeStage money=" + money);
+#endif
             OnMoneyChanged?.Invoke(money);
             StartVisit();
         }
@@ -52,13 +59,25 @@ namespace GameJam_URA.Prototype
         public void LogAction(string conditionId)
         {
             actionLog.Add(conditionId);
+#if UNITY_EDITOR
+            MantenseiLib.Editor.DebugFileLogger.Log("gameplay", "GM", "LogAction: " + conditionId);
+#endif
             OnActionLogged?.Invoke(conditionId);
         }
 
         public bool SpendMoney(int amount)
         {
-            if (money < amount) return false;
+            if (money < amount)
+            {
+#if UNITY_EDITOR
+                MantenseiLib.Editor.DebugFileLogger.Log("gameplay", "GM", "SpendMoney FAILED amount=" + amount + " money=" + money);
+#endif
+                return false;
+            }
             money -= amount;
+#if UNITY_EDITOR
+            MantenseiLib.Editor.DebugFileLogger.Log("gameplay", "GM", "SpendMoney amount=" + amount + " remaining=" + money);
+#endif
             OnMoneyChanged?.Invoke(money);
             return true;
         }
@@ -72,6 +91,9 @@ namespace GameJam_URA.Prototype
         public void SetState(GameState newState)
         {
             state = newState;
+#if UNITY_EDITOR
+            MantenseiLib.Editor.DebugFileLogger.Log("gameplay", "GM", "SetState: " + newState);
+#endif
             OnStateChanged?.Invoke(state);
         }
 

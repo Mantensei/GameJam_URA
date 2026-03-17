@@ -49,12 +49,18 @@ namespace GameJam_URA.Prototype
             var target = detector.CurrentTarget;
             if (target == null) return;
             if (!target.CanInteract(this)) return;
+#if UNITY_EDITOR
+            MantenseiLib.Editor.DebugFileLogger.Log("gameplay", "Input", "Interact: " + target.InteractLabel + " (" + target.gameObject.name + ")");
+#endif
             target.Interact(this);
         }
 
         void TryOpenCommentUI()
         {
             if (commentUI == null) return;
+#if UNITY_EDITOR
+            MantenseiLib.Editor.DebugFileLogger.Log("gameplay", "Input", "OpenCommentUI");
+#endif
             commentUI.Open();
         }
 
@@ -62,6 +68,9 @@ namespace GameJam_URA.Prototype
         {
             isSitting = true;
             currentSeat = seat;
+#if UNITY_EDITOR
+            MantenseiLib.Editor.DebugFileLogger.Log("gameplay", "Input", "SitDown: " + seat.gameObject.name);
+#endif
             if (playerController != null)
                 playerController.enabled = false;
         }
@@ -70,6 +79,9 @@ namespace GameJam_URA.Prototype
         {
             isSitting = false;
             currentSeat = null;
+#if UNITY_EDITOR
+            MantenseiLib.Editor.DebugFileLogger.Log("gameplay", "Input", "StandUp");
+#endif
             if (playerController != null)
                 playerController.enabled = true;
         }

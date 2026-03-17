@@ -3,6 +3,7 @@ using static MantenseiLib.InputBindingKeys;
 
 namespace GameJam_URA.Prototype
 {
+    // TODO: InputActionPresetを継承してInputActionManagerに統合すべき
     public class RestaurantInputActions
     {
         static readonly RestaurantInputActions _instance = new();

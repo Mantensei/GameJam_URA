@@ -5,10 +5,11 @@ namespace GameJam_URA.Prototype
 {
     public class MoneyUI : MonoBehaviour
     {
-        [SerializeField] TMP_Text moneyText;
+        TMP_Text moneyText;
 
         void Start()
         {
+            moneyText = GetComponentInChildren<TMP_Text>();
             GameManager.Instance.OnMoneyChanged += UpdateDisplay;
             UpdateDisplay(GameManager.Instance.Money);
         }

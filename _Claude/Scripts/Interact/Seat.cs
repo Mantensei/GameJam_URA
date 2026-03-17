@@ -31,6 +31,9 @@ namespace GameJam_URA.Prototype
 
         public void Interact(RestaurantInputHandler player)
         {
+#if UNITY_EDITOR
+            MantenseiLib.Editor.DebugFileLogger.Log("gameplay", "Seat", gameObject.name + " Interact label=" + InteractLabel);
+#endif
             if (player.IsSitting && player.CurrentSeat == this)
             {
                 if (!menuOpened)

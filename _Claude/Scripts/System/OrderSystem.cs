@@ -20,6 +20,9 @@ namespace GameJam_URA.Prototype
         {
             var gm = GameManager.Instance;
             if (!gm.SpendMoney(item.Price)) return false;
+#if UNITY_EDITOR
+            MantenseiLib.Editor.DebugFileLogger.Log("gameplay", "Order", "PlaceOrder: " + item.ItemName + " price=" + item.Price);
+#endif
 
             gm.LogAction("order:" + item.ItemName);
             OnOrderPlaced?.Invoke(item);
@@ -56,6 +59,9 @@ namespace GameJam_URA.Prototype
 
             var plate = Instantiate(foodPlatePrefab, spawnPos, Quaternion.identity);
             plate.Setup(entry.item);
+#if UNITY_EDITOR
+            MantenseiLib.Editor.DebugFileLogger.Log("gameplay", "Order", "FoodReady: " + entry.item.ItemName);
+#endif
             OnFoodReady?.Invoke(entry.item);
         }
 

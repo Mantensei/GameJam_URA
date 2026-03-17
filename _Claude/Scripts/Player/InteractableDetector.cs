@@ -44,7 +44,6 @@ namespace GameJam_URA.Prototype
             if (interactable != null && !nearbyTargets.Contains(interactable))
             {
                 nearbyTargets.Add(interactable);
-                Debug.Log("InteractableDetector: registered " + interactable.gameObject.name);
             }
         }
 

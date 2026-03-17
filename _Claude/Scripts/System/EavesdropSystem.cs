@@ -6,15 +6,18 @@ namespace GameJam_URA.Prototype
     public class EavesdropSystem : MonoBehaviour
     {
         [SerializeField] GameObject eavesdropPanel;
-        [SerializeField] TMP_Text eavesdropText;
         [SerializeField] float displayDuration = 3f;
 
+        TMP_Text eavesdropText;
         float hideTimer;
 
         void Start()
         {
             if (eavesdropPanel != null)
+            {
+                eavesdropText = eavesdropPanel.GetComponentInChildren<TMP_Text>(true);
                 eavesdropPanel.SetActive(false);
+            }
 
             var customers = FindObjectsByType<CustomerAI>(FindObjectsSortMode.None);
             foreach (var customer in customers)
@@ -31,6 +34,10 @@ namespace GameJam_URA.Prototype
             if (!customer.TimelineData.IsRegular) return;
 
             var player = FindAnyObjectByType<RestaurantInputHandler>();
+            bool sitting = player != null && player.IsSitting;
+#if UNITY_EDITOR
+            MantenseiLib.Editor.DebugFileLogger.Log("gameplay", "Eavesdrop", "Whisper: " + customer.TimelineData.CustomerName + " playerSitting=" + sitting);
+#endif
             if (player == null || !player.IsSitting) return;
 
             string secretMenuName = "";

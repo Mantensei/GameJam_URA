@@ -1,61 +1,50 @@
 #if UNITY_EDITOR
-using TMPro;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 namespace GameJam_URA.Prototype
 {
+    //実行を確認したら関数の中のコードは消す。
+    //ファイルを更新したらMenuItemに現在の時刻を入れる
+
     public class EditorSandbox
     {
-        [MenuItem("GameJam/Run Sandbox")]
+        const string BasePath = "Assets/_GameJam_URA/_Claude/Sandbox/UIToolkitTest";
+        const string ScenePath = BasePath + "/UIToolkitTestScene.unity";
+        const string PanelSettingsPath = BasePath + "/UIToolkitPanelSettings.asset";
+        const string GameHUDPath = BasePath + "/UI/GameHUD.uxml";
+
+        [MenuItem("GameJam/Run Sandbox (03-17 15:39)")]
         static void Run()
         {
-            ReplaceTextWithTMP();
-        }
+            var panelSettings = AssetDatabase.LoadAssetAtPath<PanelSettings>(PanelSettingsPath);
+            var gameHUD = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(GameHUDPath);
 
-        static void ReplaceTextWithTMP()
-        {
-            var texts = Object.FindObjectsByType<Text>(FindObjectsSortMode.None);
-            Debug.Log("Found " + texts.Length + " Text components to replace");
-
-            foreach (var oldText in texts)
+            if (panelSettings == null)
             {
-                var go = oldText.gameObject;
-                string content = oldText.text;
-                int fontSize = oldText.fontSize;
-                Color color = oldText.color;
-                TextAnchor anchor = oldText.alignment;
-
-                Undo.DestroyObjectImmediate(oldText);
-
-                var tmp = Undo.AddComponent<TextMeshProUGUI>(go);
-                tmp.text = content;
-                tmp.fontSize = fontSize;
-                tmp.color = color;
-                tmp.alignment = ConvertAlignment(anchor);
-
-                EditorUtility.SetDirty(go);
+                Debug.LogError("PanelSettingsが見つかりません: " + PanelSettingsPath);
+                return;
+            }
+            if (gameHUD == null)
+            {
+                Debug.LogError("GameHUD.uxmlが見つかりません: " + GameHUDPath);
+                return;
             }
 
-            Debug.Log("Replaced " + texts.Length + " Text → TextMeshProUGUI");
-        }
+            var scene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
 
-        static TextAlignmentOptions ConvertAlignment(TextAnchor anchor)
-        {
-            switch (anchor)
-            {
-                case TextAnchor.UpperLeft: return TextAlignmentOptions.TopLeft;
-                case TextAnchor.UpperCenter: return TextAlignmentOptions.Top;
-                case TextAnchor.UpperRight: return TextAlignmentOptions.TopRight;
-                case TextAnchor.MiddleLeft: return TextAlignmentOptions.MidlineLeft;
-                case TextAnchor.MiddleCenter: return TextAlignmentOptions.Center;
-                case TextAnchor.MiddleRight: return TextAlignmentOptions.MidlineRight;
-                case TextAnchor.LowerLeft: return TextAlignmentOptions.BottomLeft;
-                case TextAnchor.LowerCenter: return TextAlignmentOptions.Bottom;
-                case TextAnchor.LowerRight: return TextAlignmentOptions.BottomRight;
-                default: return TextAlignmentOptions.Center;
-            }
+            var go = new GameObject("GameHUD");
+            var doc = go.AddComponent<UIDocument>();
+
+            var so = new SerializedObject(doc);
+            so.FindProperty("m_PanelSettings").objectReferenceValue = panelSettings;
+            so.FindProperty("sourceAsset").objectReferenceValue = gameHUD;
+            so.ApplyModifiedPropertiesWithoutUndo();
+
+            EditorSceneManager.SaveScene(scene, ScenePath);
+            Debug.Log("UIToolkitテストシーンを作成しました: " + ScenePath);
         }
     }
 }

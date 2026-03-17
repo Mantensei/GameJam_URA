@@ -20,8 +20,8 @@ namespace GameJam_URA.Prototype
     public class CustomerAI : MonoBehaviour
     {
         [SerializeField] CustomerTimelineData timelineData;
-        [GetComponent(HierarchyRelation.Children)]
-        IMoverEntity mover;
+        [Parent]
+        PlayerReferenceHub hub;
 
         CustomerPhase phase = CustomerPhase.Inactive;
         float phaseTimer;
@@ -95,7 +95,7 @@ namespace GameJam_URA.Prototype
                 return;
             }
             float dir = diff.x > 0 ? 1f : -1f;
-            mover?.Move(new MoveCommand(dir, 0));
+            hub.MoverReference?.Move(new MoveCommand(dir, 0));
         }
 
         void UpdateTimer(CustomerPhase nextPhase)
@@ -109,17 +109,25 @@ namespace GameJam_URA.Prototype
         {
             phase = newPhase;
             phaseTimer = 0f;
+#if UNITY_EDITOR
+            string name = timelineData != null ? timelineData.CustomerName : "?";
+            MantenseiLib.Editor.DebugFileLogger.Log("gameplay", "Customer", name + " → " + newPhase);
+#endif
         }
 
         void SetPhaseWithTimer(CustomerPhase newPhase, float time)
         {
             phase = newPhase;
             phaseTimer = time;
+#if UNITY_EDITOR
+            string name = timelineData != null ? timelineData.CustomerName : "?";
+            MantenseiLib.Editor.DebugFileLogger.Log("gameplay", "Customer", name + " → " + newPhase + " (timer=" + time + "s)");
+#endif
         }
 
         void StopMoving()
         {
-            mover?.Move(new MoveCommand(0, 0));
+            hub.MoverReference?.Move(new MoveCommand(0, 0));
         }
 
         void ShowOrderBubble()
