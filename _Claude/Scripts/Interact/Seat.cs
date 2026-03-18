@@ -2,8 +2,10 @@ using UnityEngine;
 
 namespace GameJam_URA.Prototype
 {
-    public class Seat : MonoBehaviour, IInteractable
+    public class Seat : MonoBehaviour
     {
+        // [Legacy] RestaurantInputHandler依存のため一時無効化
+        /*
         [SerializeField] Transform sitPosition;
 
         RestaurantInputHandler occupant;
@@ -61,5 +63,6 @@ namespace GameJam_URA.Prototype
             occupant = null;
             menuOpened = false;
         }
+        */
     }
 }

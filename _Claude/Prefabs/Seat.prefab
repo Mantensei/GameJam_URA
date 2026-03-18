@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 8595773035642106135}
   - component: {fileID: 5012806179571556574}
   - component: {fileID: 7512322366251952629}
-  - component: {fileID: 1437280299148903521}
+  - component: {fileID: 2086190468978286176}
   m_Layer: 0
   m_Name: Seat
   m_TagString: Untagged
@@ -60,7 +60,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5745737613852451696}
@@ -116,7 +116,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -8785830227531833798, guid: 00545296f3c19d04ca43bdfc7b97672d, type: 3}
-  m_Color: {r: 0.6, g: 0.4, b: 0.2, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 0.2}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -169,9 +169,9 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1.5}
+  m_Size: {x: 2.56, y: 2.56}
   m_EdgeRadius: 0
---- !u!114 &1437280299148903521
+--- !u!114 &2086190468978286176
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,7 +180,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6030360516220657418}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0245ab07fee04ea4586fc3bb777645ee, type: 3}
+  m_Script: {fileID: 11500000, guid: f0e02096d198aad4ba2b5682edaf2fc4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Seat
-  sitPosition: {fileID: 5745737613852451696}
+  m_EditorClassIdentifier: Assembly-CSharp::GameJam_URA.Seat

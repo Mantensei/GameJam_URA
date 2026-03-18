@@ -7,6 +7,7 @@ namespace GameJam_URA.Prototype
 {
     public class JudgmentUI : MonoBehaviour
     {
+        /*
         [SerializeField] GameObject judgmentPanel;
         [SerializeField] Button continueButton;
 
@@ -71,5 +72,6 @@ namespace GameJam_URA.Prototype
             gm.SetState(GameState.Result);
             gm.OnVisitEnd();
         }
+        */
     }
 }

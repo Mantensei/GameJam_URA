@@ -2,8 +2,10 @@ using UnityEngine;
 
 namespace GameJam_URA.Prototype
 {
-    public class Shopkeeper : MonoBehaviour, IInteractable
+    public class Shopkeeper : MonoBehaviour
     {
+        // [Legacy] RestaurantInputHandler依存のため一時無効化
+        /*
         public string InteractLabel => "話しかける";
 
         public bool CanInteract(RestaurantInputHandler player)
@@ -20,5 +22,6 @@ namespace GameJam_URA.Prototype
             if (judgment != null)
                 judgment.ExecuteJudgment();
         }
+        */
     }
 }

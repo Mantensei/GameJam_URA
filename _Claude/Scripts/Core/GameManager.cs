@@ -16,6 +16,7 @@ namespace GameJam_URA.Prototype
 
     public class GameManager : SingletonMonoBehaviour<GameManager>
     {
+        /*
         [SerializeField] StageData currentStage;
 
         GameState state;
@@ -106,5 +107,6 @@ namespace GameJam_URA.Prototype
             }
             StartVisit();
         }
+        */
     }
 }

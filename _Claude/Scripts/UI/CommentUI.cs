@@ -1,11 +1,11 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace GameJam_URA.Prototype
 {
     public class CommentUI : MonoBehaviour
     {
+        // [Legacy] RestaurantInputHandler依存のため一時無効化
+        /*
         [SerializeField] GameObject commentPanel;
         [SerializeField] Transform buttonContainer;
         [SerializeField] Button commentButtonPrefab;
@@ -62,5 +62,6 @@ namespace GameJam_URA.Prototype
 
             Close();
         }
+        */
     }
 }

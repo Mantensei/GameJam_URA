@@ -2,8 +2,10 @@ using UnityEngine;
 
 namespace GameJam_URA.Prototype
 {
-    public class FoodPlate : MonoBehaviour, IInteractable
+    public class FoodPlate : MonoBehaviour
     {
+        // [Legacy] RestaurantInputHandler依存のため一時無効化
+        /*
         MenuItemData menuItem;
 
         public string InteractLabel => "食べる";
@@ -24,5 +26,6 @@ namespace GameJam_URA.Prototype
             GameManager.Instance.LogAction("eat:" + menuItem.ItemName);
             Destroy(gameObject);
         }
+        */
     }
 }

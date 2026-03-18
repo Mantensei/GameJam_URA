@@ -6,6 +6,7 @@ namespace GameJam_URA.Prototype
 {
     public class ResultUI : MonoBehaviour
     {
+        /*
         [SerializeField] GameObject clearPanel;
         [SerializeField] GameObject gameOverPanel;
         [SerializeField] Button retryButton;
@@ -37,5 +38,6 @@ namespace GameJam_URA.Prototype
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+        */
     }
 }

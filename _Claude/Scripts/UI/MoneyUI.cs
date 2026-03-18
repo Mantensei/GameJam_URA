@@ -5,6 +5,7 @@ namespace GameJam_URA.Prototype
 {
     public class MoneyUI : MonoBehaviour
     {
+        /*
         TMP_Text moneyText;
 
         void Start()
@@ -25,5 +26,6 @@ namespace GameJam_URA.Prototype
             if (moneyText != null)
                 moneyText.text = amount + "円";
         }
+        */
     }
 }

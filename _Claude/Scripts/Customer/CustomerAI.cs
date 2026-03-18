@@ -19,6 +19,7 @@ namespace GameJam_URA.Prototype
 
     public class CustomerAI : MonoBehaviour
     {
+        /*
         [SerializeField] CustomerTimelineData timelineData;
         [Parent]
         PlayerReferenceHub hub;
@@ -153,5 +154,6 @@ namespace GameJam_URA.Prototype
             if (speechBubble == null) return;
             speechBubble.Show("（コソコソ…）");
         }
+        */
     }
 }

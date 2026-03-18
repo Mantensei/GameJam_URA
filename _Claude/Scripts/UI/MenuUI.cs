@@ -1,11 +1,11 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace GameJam_URA.Prototype
 {
     public class MenuUI : MonoBehaviour
     {
+        // [Legacy] RestaurantInputHandler依存のため一時無効化
+        /*
         [SerializeField] GameObject menuPanel;
         [SerializeField] Transform itemContainer;
         [SerializeField] Button menuItemButtonPrefab;
@@ -75,5 +75,6 @@ namespace GameJam_URA.Prototype
             for (int i = itemContainer.childCount - 1; i >= 0; i--)
                 Destroy(itemContainer.GetChild(i).gameObject);
         }
+        */
     }
 }

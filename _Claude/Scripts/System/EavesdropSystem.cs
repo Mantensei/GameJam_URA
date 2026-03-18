@@ -1,10 +1,11 @@
-using TMPro;
 using UnityEngine;
 
 namespace GameJam_URA.Prototype
 {
     public class EavesdropSystem : MonoBehaviour
     {
+        // [Legacy] RestaurantInputHandler依存のため一時無効化
+        /*
         [SerializeField] GameObject eavesdropPanel;
         [SerializeField] float displayDuration = 3f;
 
@@ -68,5 +69,6 @@ namespace GameJam_URA.Prototype
             if (hideTimer <= 0f && eavesdropPanel != null)
                 eavesdropPanel.SetActive(false);
         }
+        */
     }
 }

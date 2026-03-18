@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c1e8f45982345b41b37bdd37c823640, type: 3}
+  m_Name: _Stage_Tutorial
+  m_EditorClassIdentifier: Assembly-CSharp::GameJam_URA.StageData
+  initialMoney: 3500
+  normaData: {fileID: 11400000, guid: 30e44f9a303781941b9a4a437adcfb8f, type: 2}
+  dobonData: {fileID: 11400000, guid: 208745c151d76d24c9d0ef61f92ac456, type: 2}
+  customerTimelineData: {fileID: 11400000, guid: 2a1909f39c3f3764693a3bbc242064dd, type: 2}

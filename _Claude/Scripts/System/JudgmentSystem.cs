@@ -6,6 +6,7 @@ namespace GameJam_URA.Prototype
 {
     public class JudgmentSystem : MonoBehaviour
     {
+        /*
         public void ExecuteJudgment()
         {
             var gm = GameManager.Instance;
@@ -41,5 +42,6 @@ namespace GameJam_URA.Prototype
             if (judgmentUI != null)
                 judgmentUI.ShowResult(cleared, normaCount, normaTotal, totalPenalty, triggeredDobons);
         }
+        */
     }
 }

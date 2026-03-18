@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81545b3790524cd409a411c4b9ed05c2, type: 3}
+  m_Name: Norma_Tutorial
+  m_EditorClassIdentifier: Assembly-CSharp::GameJam_URA.NormaData
+  children:
+  - {fileID: 11400000, guid: 2d3f4dc99ac4d3c48bff36653f979ff2, type: 2}
+  - {fileID: 11400000, guid: 2fc84cd9543dfc24389607b098cd377b, type: 2}
+  - {fileID: 11400000, guid: 54978075b47801347bb6b0597d4596ca, type: 2}

@@ -1,9 +1,8 @@
-namespace GameJam_URA.Prototype
+namespace GameJam_URA
 {
     public interface IInteractable : IMonoBehaviour
     {
-        void Interact(RestaurantInputHandler player);
-        bool CanInteract(RestaurantInputHandler player);
-        string InteractLabel { get; }
+        void Interact(URA_PlayerReferenceHub player);
+        string ActiontLabel { get; }
     }
 }

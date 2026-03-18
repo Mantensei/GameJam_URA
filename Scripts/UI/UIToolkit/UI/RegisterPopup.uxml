@@ -1,0 +1,28 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="RegisterPopup.uss" />
+
+    <ui:VisualElement name="register-overlay" class="popup-overlay">
+        <ui:VisualElement name="register-book" class="book">
+            <ui:VisualElement name="register-cover-left" class="book-cover book-cover-left" />
+            <ui:VisualElement name="register-pages" class="book-pages">
+                <ui:Label name="register-title" text="レジ" class="book-title" />
+                <ui:VisualElement class="book-content">
+                    <ui:VisualElement name="register-body">
+                        <ui:VisualElement name="register-content">
+                            <ui:VisualElement name="register-order-summary" />
+                            <ui:VisualElement name="register-list">
+                                <ui:Label text="・お会計" class="register-list-item" />
+                                <ui:Label text="・裏メニュー注文" class="register-list-item" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="register-character">
+                            <ui:VisualElement name="register-silhouette" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:Label name="register-close-btn" text="閉じる(Escape)" class="book-footer" />
+            </ui:VisualElement>
+            <ui:VisualElement name="register-cover-right" class="book-cover book-cover-right" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
