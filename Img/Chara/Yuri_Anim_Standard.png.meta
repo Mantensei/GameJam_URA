@@ -1,0 +1,832 @@
+fileFormatVersion: 2
+guid: 9aedcf86a5b8c0642a5371f71539b59f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4239289416765356690
+    second: Yuri_Anim_Standard_0
+  - first:
+      213: 3785489689489579960
+    second: Yuri_Anim_Standard_1
+  - first:
+      213: -2172828741859568348
+    second: Yuri_Anim_Standard_2
+  - first:
+      213: 7931486415505586418
+    second: Yuri_Anim_Standard_3
+  - first:
+      213: 8225113931937183413
+    second: Yuri_Anim_Standard_4
+  - first:
+      213: 6887106913395126791
+    second: Yuri_Anim_Standard_5
+  - first:
+      213: 2814425010562926272
+    second: Yuri_Anim_Standard_6
+  - first:
+      213: -3827997176045482495
+    second: Yuri_Anim_Standard_7
+  - first:
+      213: 4785742508873907398
+    second: Yuri_Anim_Standard_8
+  - first:
+      213: -4717481300694435214
+    second: Yuri_Anim_Standard_9
+  - first:
+      213: 5690444468275402303
+    second: Yuri_Anim_Standard_10
+  - first:
+      213: 1233055657233162798
+    second: Yuri_Anim_Standard_11
+  - first:
+      213: 6195331722226884703
+    second: Yuri_Anim_Standard_12
+  - first:
+      213: 8216271862929861959
+    second: Yuri_Anim_Standard_13
+  - first:
+      213: -6084192086088259175
+    second: Yuri_Anim_Standard_14
+  - first:
+      213: -5482779648077190086
+    second: Yuri_Anim_Standard_15
+  - first:
+      213: 8468437398225094176
+    second: Yuri_Anim_Standard_16
+  - first:
+      213: -4539145726121906831
+    second: Yuri_Anim_Standard_17
+  - first:
+      213: -2001935644342133087
+    second: Yuri_Anim_Standard_18
+  - first:
+      213: -548277496110411866
+    second: Yuri_Anim_Standard_19
+  - first:
+      213: 1491174736142487418
+    second: Yuri_Anim_Standard_20
+  - first:
+      213: 8542057175655496984
+    second: Yuri_Anim_Standard_21
+  - first:
+      213: 6665441144551530151
+    second: Yuri_Anim_Standard_22
+  - first:
+      213: -8309208846678736916
+    second: Yuri_Anim_Standard_23
+  - first:
+      213: 2869867926215531533
+    second: Yuri_Anim_Standard_24
+  - first:
+      213: 2802107614549287873
+    second: Yuri_Anim_Standard_25
+  - first:
+      213: 8563668054551685618
+    second: Yuri_Anim_Standard_26
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_0
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 518
+        width: 38
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e65c0a57cb40b25c0800000000000000
+      internalID: -4239289416765356690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_1
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 518
+        width: 38
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bf1ee2f0d2c88430800000000000000
+      internalID: 3785489689489579960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_2
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 518
+        width: 38
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42593bb75cf88d1e0800000000000000
+      internalID: -2172828741859568348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_3
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 518
+        width: 38
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f8fb014fdc421e60800000000000000
+      internalID: 7931486415505586418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_4
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 383
+        width: 46
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b67b36ea89752270800000000000000
+      internalID: 8225113931937183413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_5
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 390
+        width: 38
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 702bd0f8f3be39f50800000000000000
+      internalID: 6887106913395126791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_6
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 383
+        width: 41
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c60499b2a8de0720800000000000000
+      internalID: 2814425010562926272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_7
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 391
+        width: 38
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10e4c9899d830eac0800000000000000
+      internalID: -3827997176045482495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_8
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 279
+        width: 11
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cc7ae3b47f5a6240800000000000000
+      internalID: 4785742508873907398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_9
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 281
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27a7f8550c3288eb0800000000000000
+      internalID: -4717481300694435214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_10
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 284
+        width: 41
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3654a9381588fe40800000000000000
+      internalID: 5690444468275402303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_11
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 279
+        width: 37
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e222ba55691bc1110800000000000000
+      internalID: 1233055657233162798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_12
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 279
+        width: 51
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f50ea09806d3af550800000000000000
+      internalID: 6195331722226884703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_13
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 279
+        width: 51
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74da8f74abf060270800000000000000
+      internalID: 8216271862929861959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_14
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 275
+        width: 14
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 999677b788b909ba0800000000000000
+      internalID: -6084192086088259175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_15
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 272
+        width: 14
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3c2e9685f049e3b0800000000000000
+      internalID: -5482779648077190086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_16
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 275
+        width: 14
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02607db22fee58570800000000000000
+      internalID: 8468437398225094176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_17
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 272
+        width: 14
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17d65c2f207b101c0800000000000000
+      internalID: -4539145726121906831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_18
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 156
+        width: 46
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ae5bcf5322b734e0800000000000000
+      internalID: -2001935644342133087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_19
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 156
+        width: 39
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6af8ffda5802468f0800000000000000
+      internalID: -548277496110411866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_20
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 156
+        width: 46
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7f4fcd9587b1b410800000000000000
+      internalID: 1491174736142487418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_21
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 156
+        width: 39
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81db5065ebb7b8670800000000000000
+      internalID: 8542057175655496984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_22
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 63
+        width: 31
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ae544ce767608c50800000000000000
+      internalID: 6665441144551530151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_23
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 30
+        width: 45
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cef3e29f392cfac80800000000000000
+      internalID: -8309208846678736916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_24
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 58
+        width: 64
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0c1d567ca1d3d720800000000000000
+      internalID: 2869867926215531533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_25
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 36
+        width: 46
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c3a0ab770613e620800000000000000
+      internalID: 2802107614549287873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Yuri_Anim_Standard_26
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 27
+        width: 54
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f9e9ed29b248d670800000000000000
+      internalID: 8563668054551685618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Yuri_Anim_Standard_0: -4239289416765356690
+      Yuri_Anim_Standard_1: 3785489689489579960
+      Yuri_Anim_Standard_10: 5690444468275402303
+      Yuri_Anim_Standard_11: 1233055657233162798
+      Yuri_Anim_Standard_12: 6195331722226884703
+      Yuri_Anim_Standard_13: 8216271862929861959
+      Yuri_Anim_Standard_14: -6084192086088259175
+      Yuri_Anim_Standard_15: -5482779648077190086
+      Yuri_Anim_Standard_16: 8468437398225094176
+      Yuri_Anim_Standard_17: -4539145726121906831
+      Yuri_Anim_Standard_18: -2001935644342133087
+      Yuri_Anim_Standard_19: -548277496110411866
+      Yuri_Anim_Standard_2: -2172828741859568348
+      Yuri_Anim_Standard_20: 1491174736142487418
+      Yuri_Anim_Standard_21: 8542057175655496984
+      Yuri_Anim_Standard_22: 6665441144551530151
+      Yuri_Anim_Standard_23: -8309208846678736916
+      Yuri_Anim_Standard_24: 2869867926215531533
+      Yuri_Anim_Standard_25: 2802107614549287873
+      Yuri_Anim_Standard_26: 8563668054551685618
+      Yuri_Anim_Standard_3: 7931486415505586418
+      Yuri_Anim_Standard_4: 8225113931937183413
+      Yuri_Anim_Standard_5: 6887106913395126791
+      Yuri_Anim_Standard_6: 2814425010562926272
+      Yuri_Anim_Standard_7: -3827997176045482495
+      Yuri_Anim_Standard_8: 4785742508873907398
+      Yuri_Anim_Standard_9: -4717481300694435214
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

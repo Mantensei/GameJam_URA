@@ -251,49 +251,58 @@ body {
     background: #999;
 }
 
-#comment-overlay .book-cover {
+#comment-overlay .book-cover,
+#register-overlay .book-cover {
     background: #fff;
     border-color: #fff;
 }
 
-#comment-overlay .book-pages {
+#comment-overlay .book-pages,
+#register-overlay .book-pages {
     background: #fff;
 }
 
-#comment-body {
+#comment-body,
+#register-body {
     flex: 1;
     display: flex;
 }
 
-#comment-content {
+#comment-content,
+#register-content {
     flex: 1;
     display: flex;
     align-items: center;
 }
 
-#comment-list {
+#comment-list,
+#register-list {
     list-style: none;
     display: flex;
     flex-direction: column;
     gap: 6px;
 }
 
-#comment-list li {
+#comment-list li,
+#register-list li {
     font-size: var(--font-small);
 }
 
-#comment-list li::before {
+#comment-list li::before,
+#register-list li::before {
     content: "\30FB";
 }
 
-#comment-character {
+#comment-character,
+#register-character {
     width: 100px;
     display: flex;
     align-items: flex-end;
     justify-content: center;
 }
 
-#comment-silhouette {
+#comment-silhouette,
+#register-silhouette {
     width: 70px;
     height: 90%;
     background: #ccc;

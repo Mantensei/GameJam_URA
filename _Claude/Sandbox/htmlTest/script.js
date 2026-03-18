@@ -18,7 +18,7 @@ function scaleApp() {
 var popups = [
     'menu-popup',
     'comment-popup',
-    // 'next-popup',
+    'register-popup',
 ];
 
 var activePopup = popups[0];
