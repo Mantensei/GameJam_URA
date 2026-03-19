@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace GameJam_URA
 {
-    [CreateAssetMenu(fileName = "NewNormaData", menuName = "GameJam/NormaData")]
-    public class NormaData : ScriptableObject, INormaProvider
+    [CreateAssetMenu(fileName = "NewNormaTable", menuName = "GameJam/NormaTable")]
+    public class NormaTable : ScriptableObject, INormaProvider
     {
         //入れ子にしたかったが難しいので、広めの参照をもってカスタムエディターで整える
         [SerializeField] ScriptableObject[] children;
@@ -30,8 +30,8 @@ namespace GameJam_URA
 {
     using UnityEditor;
 
-    [CustomEditor(typeof(NormaData))]
-    public class NormaDataEditor : Editor
+    [CustomEditor(typeof(NormaTable))]
+    public class NormaTableEditor : Editor
     {
         public override void OnInspectorGUI()
         {
@@ -57,7 +57,7 @@ namespace GameJam_URA
                     Debug.Log($"{obj.name} は INormaProvider を実装していないため除外されました");
                     prop.GetArrayElementAtIndex(i).objectReferenceValue = null;
                 }
-                else if (obj is NormaData data && WouldCauseCircle(data))
+                else if (obj is NormaTable data && WouldCauseCircle(data))
                 {
                     Debug.Log($"{obj.name} は循環参照になるため除外されました");
                     prop.GetArrayElementAtIndex(i).objectReferenceValue = null;
@@ -70,14 +70,14 @@ namespace GameJam_URA
             }
         }
 
-        bool WouldCauseCircle(NormaData candidate)
+        bool WouldCauseCircle(NormaTable candidate)
         {
             if (candidate == target) return true;
-            var visiting = new HashSet<NormaData> { (NormaData)target };
+            var visiting = new HashSet<NormaTable> { (NormaTable)target };
             return DetectCycle(candidate, visiting);
         }
 
-        static bool DetectCycle(NormaData current, HashSet<NormaData> visiting)
+        static bool DetectCycle(NormaTable current, HashSet<NormaTable> visiting)
         {
             if (!visiting.Add(current)) return true;
 
@@ -85,7 +85,7 @@ namespace GameJam_URA
             var children = so.FindProperty("children");
             for (int i = 0; i < children.arraySize; i++)
             {
-                var child = children.GetArrayElementAtIndex(i).objectReferenceValue as NormaData;
+                var child = children.GetArrayElementAtIndex(i).objectReferenceValue as NormaTable;
                 if (child != null && DetectCycle(child, visiting))
                     return true;
             }

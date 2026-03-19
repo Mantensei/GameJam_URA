@@ -31,18 +31,23 @@ namespace GameJam_URA
     {
         [SerializeField] StageId stageId;
         [SerializeField] int initialMoney;
-        [SerializeField] NormaData normaData;
+        [SerializeField] NormaTable normaData;
         [SerializeField] int normaCount;
-        [SerializeField] NormaData dobonData;
+        [SerializeField] NormaTable dobonData;
         [SerializeField] int dobonCount;
         [SerializeField] int menuCount;
-        [SerializeField] CustomerTimelineData customerTimelineData;
+        [SerializeField] float timeLimit = 180f;
+        [SerializeField] CustomerTable customerTable;
+        [SerializeField] int regularCount = 1;
 
         public StageId Id => stageId;
         public int InitialMoney => initialMoney;
+        public float TimeLimit => timeLimit;
         public int DobonPenalty => stageId.DobonPenalty();
         public string[] Comments => StageIdExtensions.Comments;
-        public CustomerTimelineData CustomerTimelineData => customerTimelineData;
+        public List<CustomerData> Customers => builtCustomers;
+
+        List<CustomerData> builtCustomers;
 
         List<Norma> builtNormas;
         List<Norma> builtDobons;
@@ -54,6 +59,10 @@ namespace GameJam_URA
 
         public void Init()
         {
+            builtCustomers = new List<CustomerData>();
+            customerTable.GetAllCustomerData(builtCustomers);
+            AssignRegulars();
+
             var normaPool = new List<Norma>();
             normaData.GetAllNormas(normaPool);
             builtNormas = PickRandom(normaPool, normaCount);
@@ -94,6 +103,14 @@ namespace GameJam_URA
             }
 
             Shuffle(builtMenuList);
+        }
+
+        void AssignRegulars()
+        {
+            Shuffle(builtCustomers);
+            int count = Mathf.Min(regularCount, builtCustomers.Count);
+            for (int i = 0; i < builtCustomers.Count; i++)
+                builtCustomers[i].IsRegular = i < count;
         }
 
         static List<Norma> PickRandom(List<Norma> pool, int count)

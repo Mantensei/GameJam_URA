@@ -6,47 +6,62 @@
 - 一気に何個も作らず、個別に一つ一つ作る
 - 指示を受けていない場合は何もしない。すべてのタスクは指示を受けてから行う
 - GAME_DESIGN.md は変更箇所が多いので軽く読む程度で良い
-- ユーザーへの質問はAskUserQuestionで行う
+- ユーザーへの質問は絶対にAskUserQuestionで行え、質問の答えを手打ちさせるな
 
-## 今回やったこと
+---
 
-- StageData: BuildStageData → Init() に改名、ビルド結果をメンバー保持 + Normas/Dobons/MenuList プロパティ公開
-- MenuItem を MenuNorma.cs に、Comment を CommentNorma.cs に移動（ファイル整理）
-- NormaDataEditor: 同一アセット重複登録をサイレント除外、ログをDebug.Logに統一
-- NormaData.GetAllNormas: ランタイム側でもname重複除去
-- RegisterView: 「裏メニュー注文」ボタン削除、「お会計」クリックで食事代減額 + ドボン罰金減額 + ノルマ判定
-- GameManager: AddMoney(int) 追加
-- URADebugger + StageDebugPanel 作成（F1トグルでノルマ/ドボン/メニュー/所持金チートシート表示）
-- Commenter 作成（CommentView表示 + 感想選択時にCommentNorma達成判定）
-- CommentView 実装（感想リスト動的生成、選択イベント発火）
-- RestaurantInputHandler.TryComment 接続
+## 客AI設計（重要）
 
-## フキダシ実装（自動作業）
+### 設計方針の決定経緯
 
-### 作成ファイル
-- `Assets/_GameJam_URA/Scripts/UI/uGUI/SpeechBubble.cs` — 個々のフキダシ（追従・自動消滅）
-- `Assets/_GameJam_URA/Scripts/UI/uGUI/SpeechBubbleManager.cs` — プール管理・動的生成API
+ユーザーはAI作成が苦手で、振る舞いの指示はできるが設計は任せたいとのこと。
+「ステートパターンでよく止まる」ため、**とにかく止まらないAI**が最優先要件。
 
-### 編集ファイル
-- `UIViewHub.cs` — `SpeechBubbleManager SpeechBubble` プロパティ追加
-- `Commenter.cs` — Say() 内でフキダシ表示呼び出し追加
+Web調査の結果、以下の先行事例に裏付けられた方式を採用：
+- **Behavior Multi-Queues**（アルバータ大学/BioWare、Neverwinter Nights）— 順序付きタスクキュー＋優先度割り込み＋復帰
+- **The Sims** — インタラクションキュー＋欲求による割り込み
+- **FFXV** — Luminous Studioのトレイ割り込み実行
 
-### Claudeの判断ログ（要確認）
-1. **配置先:** `_Claude/` ではなく `Scripts/UI/uGUI/` に配置した。理由: レガシーではない新規本体コードのため。uGUIとUIToolkitでフォルダを分けた
-2. **UIViewHubへの参照方式:** SpeechBubbleManagerはIUIViewではないので `GetComponents` 自動取得に乗れない。`FindAnyObjectByType` でキャッシュする形にした。遅延取得（初回アクセス時にFind）
-3. **フキダシの生成方式:** 全てコードで動的生成（Prefab不要）。見た目変更時はCreateBubble()内を修正する。Prefab化した方がデザイン調整しやすいかもしれないが、まずは動くことを優先
-4. **SpeechBubbleManagerのSerializeField:** defaultDuration, defaultOffset, bubbleWidth等をSerializeFieldにした。Inspectorで微調整可能にするため（CLAUDE.mdのSerializeField最小化方針に対して例外的）
-5. **フキダシのCanvas:** 個々のフキダシがWorld Space Canvasを持つ構造。1マネージャー1Canvasにまとめる案もあるが、個別追従のシンプルさを優先
+### 採用した方式：Animator2Dと同じUpdateベース優先度評価
 
-### セットアップ手順（手動作業）
-- シーンに空GameObjectを作成し `SpeechBubbleManager` をアタッチ
+プロジェクト既存の Animator2D と同じ思想：
+- **毎フレーム最高優先度のアクティブなタスクを評価して実行**
+- コルーチンベースではなくUpdateベース（ユーザーの明確な意向）
+- 理由：Animator2Dで実証済みの方式であり堅牢、デバッグ容易、状態の不整合が構造的に起きにくい
 
-## TODO（次のルームへ引き継ぎ）
+### メインフローの仕様
 
-- Resources/Stages/ フォルダ作成とStageDataアセット配置（手動作業）
-- 生成したNormaアセットをNormaDataに格納（手動作業）
-- プレイヤーGameObjectにCommenterコンポーネントをアタッチ（手動作業）
-- SpeechBubbleManagerをシーンに配置（手動作業）
-- 行動ログ（注文履歴・発言履歴）を記録するクラスの作成
-- 客AI・スポーンシステムの再実装
-- MenuNorma.csの「Can't assign script」ダイアログの原因調査（未解決）
+```
+着席 → [注文 → 食事]（繰り返し可） → 全品食べ終わり → 退店
+```
+
+- メインフロー（注文→食事→退店）は**不可逆の因果順序**を持つ（注文しないと食べられない等）
+- 注文は何回でも可能（一度に複数品、食後の追加注文も可）
+- 出された料理を全て食べきるまで完全退店できない
+- メインフローの「退店」は来店の完了を意味する
+- 追加注文はメインフローのループ（割り込みではない）
+
+### 割り込みの仕様
+
+- 割り込み行動はメインフローの進行とは無関係にいつでも発生する
+- 感想は常時発言可能（クールタイムあり）
+- 着席・離籍は自由（食事中でも席を離れられる）
+- 食事をキャンセルして別の席で食べ直すことがある
+- 一時外出（店の外に出て戻ってくる）、トイレ等
+- 割り込みの回数上限は定数で管理（今は仮、後でSOに移行可能）
+
+### 止まらない保証
+
+- メインフローは**常にアクティブ**（IsActive = true が消えない）
+- 各フェーズは**タイマーで必ず完了する**（条件待ちで詰まらない）
+- `phase == Done` 以外は毎フレーム必ず何かを実行する
+- 割り込みが入っても、終われば自動復帰
+
+### AI関連TODO
+- [ ] 割り込み本体の実装（トイレ、一時外出、離籍等）
+- [ ] 感想の発言ロジック（クールタイム付き）
+- [ ] 各定数（Duration等）をSOに移行
+- [ ] 行動ログ（注文履歴・発言履歴）を記録するクラスの作成
+- [ ] 注文内容をプレイヤーに公開する仕組み（GAME_DESIGN: 全ての客の注文内容はプレイヤーに公開される）
+
+### その他TODO

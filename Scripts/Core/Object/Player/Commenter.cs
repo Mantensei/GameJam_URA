@@ -5,22 +5,12 @@ namespace GameJam_URA
 {
     public class Commenter : MonoBehaviour
     {
-        void Start()
-        {
-            UIViewHub.Instance.Comment.OnCommentSelected += Say;
-        }
-
-        void OnDestroy()
-        {
-            UIViewHub.Instance.Comment.OnCommentSelected -= Say;
-        }
-
         public void OpenCommentView()
         {
             UIViewHub.Instance.Comment.SetActive(true);
         }
 
-        void Say(string comment)
+        public void Say(string comment)
         {
             var stage = GameManager.Instance.CurrentStage;
             foreach (var norma in stage.Normas)

@@ -1,17 +1,27 @@
+using GameJam_URA.UI;
 using MantenseiLib;
 using UnityEngine;
 
 namespace GameJam_URA.Prototype
 {
-    public class RestaurantInputHandler : MonoBehaviour
+    public partial class URA_PlayerController : MonoBehaviour
     {
         [Parent]
         URA_PlayerReferenceHub _ura_hub;
         PlayerReferenceHub _hub => _ura_hub.PlayerHub;
         Interactor Interactor => _ura_hub.Interactor;
 
-        void OnEnable() => RestaurantInputActions.SetActive(true);
-        void OnDisable() => RestaurantInputActions.SetActive(false);
+        void Start()
+        {
+            RestaurantInputActions.SetActive(true);
+            InitUIBindings();
+        }
+
+        void OnDestroy()
+        {
+            RestaurantInputActions.SetActive(false);
+            CleanupUIBindings();
+        }
 
         void Update()
         {
@@ -39,5 +49,21 @@ namespace GameJam_URA.Prototype
         {
             _ura_hub.Commenter?.OpenCommentView();
         }
+    }
+
+    //本当はこんなダサい実装したくないけど時間かけてられないので我慢
+    partial class URA_PlayerController
+    {
+        void InitUIBindings()
+        {
+            UIViewHub.Instance.Comment.OnCommentSelected += OnCommentSelected;
+        }
+
+        void CleanupUIBindings()
+        {
+            UIViewHub.Instance.Comment.OnCommentSelected -= OnCommentSelected;
+        }
+
+        void OnCommentSelected(string comment) => _ura_hub.Commenter.Say(comment);
     }
 }

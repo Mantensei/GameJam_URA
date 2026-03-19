@@ -6,8 +6,9 @@ namespace GameJam_URA.UI
     {
         public Transform Parent { get; set; }
         public string Text { get; set; }
-        public float Duration { get; set; } = 2.5f;
+        public float Duration { get; set; } = 1f;
         public Vector3 Offset { get; set; } = Vector2.up * 0.5f;
+        public Color TextColor { get; set; } = Color.black;
     }
 
     public class SpeechBubbleManager : MonoBehaviour

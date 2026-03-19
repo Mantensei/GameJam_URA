@@ -4,20 +4,17 @@ using UnityEngine;
 namespace GameJam_URA
 {
     [Serializable]
-    public class CustomerTimeline
+    public class ActionTimeline
     {
-        [SerializeField] string customerName;
-        bool isRegular;
 
-        public string CustomerName => customerName;
-        public bool IsRegular => isRegular;
     }
 
-    [CreateAssetMenu(fileName = "NewCustomerTimelineData", menuName = "GameJam/CustomerTimelineData")]
-    public class CustomerTimelineData : ScriptableObject
+    [CreateAssetMenu(fileName = "NewActionTimelineData", menuName = "GameJam/ActionTimelineData")]
+    public class ActionTimelineData : ScriptableObject
     {
-        [SerializeField] CustomerTimeline[] timelines;
+        [SerializeField] int i;
+        [SerializeField] ActionTimeline[] timelines;
 
-        public CustomerTimeline[] Timelines => timelines;
+        public ActionTimeline[] Timelines => timelines;
     }
 }

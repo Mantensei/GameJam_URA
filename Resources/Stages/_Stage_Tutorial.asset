@@ -19,4 +19,5 @@ MonoBehaviour:
   dobonData: {fileID: 11400000, guid: 208745c151d76d24c9d0ef61f92ac456, type: 2}
   dobonCount: 1
   menuCount: 6
-  customerTimelineData: {fileID: 11400000, guid: 2a1909f39c3f3764693a3bbc242064dd, type: 2}
+  timeLimit: 180
+  customerTable: {fileID: 11400000, guid: 454d036aa649456448cd1a631b2dc449, type: 2}

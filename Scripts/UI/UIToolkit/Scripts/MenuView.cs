@@ -26,7 +26,6 @@ namespace GameJam_URA.UI
         {
             var stage = GameManager.Instance.CurrentStage;
             _menuItems = stage.MenuList;
-            Debug.Log(_menuItems.JoinToString());
             _menuItemMap = new Dictionary<MenuNorma, VisualElement>();
         }
     }

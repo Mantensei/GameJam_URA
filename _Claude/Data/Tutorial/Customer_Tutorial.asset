@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: "\u300C\u307E\u305F\u6765\u308B\u300D"
-  m_EditorClassIdentifier: Assembly-CSharp:GameJam_URA:CommentNorma
-  comment:
-    text: "\u6BCE\u65E5\u901A\u3044\u305F\u3044\u306A\uFF5E"
+  m_Name: Customer_Tutorial
+  m_EditorClassIdentifier: Assembly-CSharp:GameJam_URA:CustomerData
+  customerTimeline: {fileID: 11400000, guid: a45a05c245559ce47b9614fe9d792965, type: 2}
+  customerPrefab: {fileID: 1552000818523828337, guid: d255fee9cc46ffe4c9318df687b1ed12, type: 3}

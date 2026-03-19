@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: "\u300C\u307E\u305A\u3044"
   m_EditorClassIdentifier: Assembly-CSharp:GameJam_URA:CommentNorma
   comment:
-    text: "\u307E\u305A\u3044"
+    text: "...\u307E\u305A\u3063\uFF01\u30DA\u30C3\u30DA\u30C3"
