@@ -16,5 +16,8 @@ namespace GameJam_URA
 
         [GetComponent(HierarchyRelation.Children)]
         public Sitter Sitter { get; private set; }
+
+        [GetComponent(HierarchyRelation.Children)]
+        public Commenter Commenter { get; private set; }
     }
 }

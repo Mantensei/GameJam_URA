@@ -1,5 +1,5 @@
-using System;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace GameJam_URA.UI
@@ -8,50 +8,39 @@ namespace GameJam_URA.UI
     {
         public override UIViewType ViewType => UIViewType.Register;
 
+        VisualElement _orderSummaryContainer;
+
         protected override void OnShown()
         {
             BuildOrderSummary();
+            Root.Q<Label>("register-checkout-btn")
+                .RegisterCallback<ClickEvent>(_ => Checkout());
         }
-
-        VisualElement _orderSummaryContainer;
-        MenuView.TempMenuItem[] _orderedItems;
 
         void BuildOrderSummary()
         {
-            ClearContainer();
-            FetchOrderedItems();
-            DisplayOrderItems();
-        }
-
-        void ClearContainer()
-        {
             _orderSummaryContainer = Root.Q<VisualElement>("register-order-summary");
             _orderSummaryContainer.Clear();
-        }
-
-        ///TODO:データ層に分離してそっちを参照する
-        void FetchOrderedItems()
-        {
-            var menuItems = UIViewHub.Instance.Menu.MenuItems;
-            if (menuItems == null)
-            {
-                _orderedItems = Array.Empty<MenuView.TempMenuItem>();
-                return;
-            }
-            _orderedItems = menuItems.Where(item => item.sold).ToArray();
+            DisplayOrderItems();
         }
 
         void DisplayOrderItems()
         {
-            if (_orderedItems.Length == 0)
+            var order = GameManager.Instance.CurrentStage
+                .MenuList
+                .Where(item => item.IsCompleted)
+                .ToArray();
+
+            if (order.Length == 0)
             {
                 _orderSummaryContainer.Add(new Label("未注文") { name = "register-no-order" });
                 return;
             }
 
             int total = 0;
-            foreach (var item in _orderedItems)
+            foreach (var norma in order)
             {
+                var item = norma.MenuItem;
                 var row = new VisualElement();
                 row.AddToClassList("register-order-item");
                 row.Add(new Label(item.Name));
@@ -65,6 +54,46 @@ namespace GameJam_URA.UI
             totalRow.Add(new Label("合計"));
             totalRow.Add(new Label("¥" + total));
             _orderSummaryContainer.Add(totalRow);
+        }
+
+        void Checkout()
+        {
+            var gm = GameManager.Instance;
+            var stage = gm.CurrentStage;
+
+            int foodCost = stage.MenuList
+                .Where(item => item.IsCompleted)
+                .Sum(item => item.MenuItem.Price);
+            gm.AddMoney(-foodCost);
+            Debug.Log($"[会計] 食事代 ¥{foodCost} → 残金 ¥{gm.CurrentMoney}");
+
+            var completedDobons = stage.Dobons.Where(d => d.IsCompleted).ToArray();
+            bool dobon = completedDobons.Length > 0;
+            if (dobon)
+            {
+                int penalty = stage.DobonPenalty * completedDobons.Length;
+                gm.AddMoney(-penalty);
+                foreach (var d in completedDobons)
+                    Debug.Log($"[ドボン] {d.name}");
+                Debug.Log($"[罰金] ドボン {completedDobons.Length}件 ¥{penalty} → 残金 ¥{gm.CurrentMoney}");
+
+                Debug.Log($"[当店にふさわしくない振る舞い] ({stage.Normas.Count(n => n.IsCompleted)}/{stage.Normas.Count})");
+
+                bool gameOver = gm.CurrentMoney <= 0;
+                if (gameOver)
+                    Debug.Log("[ゲームオーバー] 所持金が尽きました");
+            }
+            else
+            {
+                bool clear = !dobon && stage.Normas.All(n => n.IsCompleted);
+
+                if (clear)
+                    Debug.Log("[判定] 全ノルマ達成！クリア！");
+                else
+                    Debug.Log($"[判定] ノルマ未達成 ({stage.Normas.Count(n => n.IsCompleted)}/{stage.Normas.Count})");
+
+            }
+            Hide();
         }
     }
 }

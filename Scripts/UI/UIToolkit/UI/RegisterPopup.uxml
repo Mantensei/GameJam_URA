@@ -11,8 +11,7 @@
                         <ui:VisualElement name="register-content">
                             <ui:VisualElement name="register-order-summary" />
                             <ui:VisualElement name="register-list">
-                                <ui:Label text="・お会計" class="register-list-item" />
-                                <ui:Label text="・裏メニュー注文" class="register-list-item" />
+                                <ui:Label text="・お会計" name="register-checkout-btn" class="register-list-item" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                         <ui:VisualElement name="register-character">

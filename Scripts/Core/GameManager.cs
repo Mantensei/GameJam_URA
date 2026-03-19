@@ -14,6 +14,8 @@ namespace GameJam_URA
         public StageData CurrentStage => currentStage;
         public int CurrentMoney => currentMoney;
 
+        public void AddMoney(int amount) => currentMoney += amount;
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         static void Initialize()
         {
@@ -23,6 +25,7 @@ namespace GameJam_URA
         GameManager()
         {
             stages = Resources.LoadAll<StageData>("Stages");
+            LoadStage(StageId.Tutorial);
         }
 
         public void LoadStage(StageId id)
@@ -43,6 +46,7 @@ namespace GameJam_URA
         void LoadStage(StageData stage)
         {
             currentStage = stage;
+            stage.Init();
             currentMoney = stage.InitialMoney;
         }
     }

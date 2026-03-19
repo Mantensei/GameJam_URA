@@ -16,10 +16,10 @@ namespace GameJam_URA
         public static int DobonPenalty(this StageId id) => id switch
         {
             StageId.Tutorial => 500,
-            StageId.Stage1   => 500,
-            StageId.Stage2   => 500,
-            StageId.Stage3   => 500,
-            _                => 500,
+            StageId.Stage1 => 500,
+            StageId.Stage2 => 500,
+            StageId.Stage3 => 500,
+            _ => 500,
         };
 
         static readonly string[] comments = { "うまい", "量が多い", "また来る", "まずい" };
@@ -44,29 +44,37 @@ namespace GameJam_URA
         public string[] Comments => StageIdExtensions.Comments;
         public CustomerTimelineData CustomerTimelineData => customerTimelineData;
 
-        public void BuildStageData(out List<Norma> normas, out List<Norma> dobons, out List<MenuNorma> menuList)
+        List<Norma> builtNormas;
+        List<Norma> builtDobons;
+        List<MenuNorma> builtMenuList;
+
+        public List<Norma> Normas => builtNormas;
+        public List<Norma> Dobons => builtDobons;
+        public List<MenuNorma> MenuList => builtMenuList;
+
+        public void Init()
         {
             var normaPool = new List<Norma>();
             normaData.GetAllNormas(normaPool);
-            normas = PickRandom(normaPool, normaCount);
+            builtNormas = PickRandom(normaPool, normaCount);
 
             var usedNames = new HashSet<string>();
-            foreach (var n in normas)
+            foreach (var n in builtNormas)
                 usedNames.Add(n.name);
 
             var dobonPool = new List<Norma>();
             dobonData.GetAllNormas(dobonPool);
             dobonPool.RemoveAll(d => usedNames.Contains(d.name));
-            dobons = PickRandom(dobonPool, dobonCount);
+            builtDobons = PickRandom(dobonPool, dobonCount);
 
-            foreach (var d in dobons)
+            foreach (var d in builtDobons)
                 usedNames.Add(d.name);
 
-            menuList = new List<MenuNorma>();
-            foreach (var n in normas)
-                if (n is MenuNorma mn) menuList.Add(mn);
-            foreach (var d in dobons)
-                if (d is MenuNorma mn) menuList.Add(mn);
+            builtMenuList = new List<MenuNorma>();
+            foreach (var n in builtNormas)
+                if (n is MenuNorma mn) builtMenuList.Add(mn);
+            foreach (var d in builtDobons)
+                if (d is MenuNorma mn) builtMenuList.Add(mn);
 
             var dummyPool = new List<Norma>();
             normaData.GetAllNormas(dummyPool);
@@ -77,15 +85,15 @@ namespace GameJam_URA
             foreach (var d in dummyPool)
                 if (d is MenuNorma mn) dummyMenus.Add(mn);
 
-            int dummyNeeded = menuCount - menuList.Count;
+            int dummyNeeded = menuCount - builtMenuList.Count;
             if (dummyNeeded > 0)
             {
                 var picked = PickRandom(new List<Norma>(dummyMenus), dummyNeeded);
                 foreach (var p in picked)
-                    menuList.Add((MenuNorma)p);
+                    builtMenuList.Add((MenuNorma)p);
             }
 
-            Shuffle(menuList);
+            Shuffle(builtMenuList);
         }
 
         static List<Norma> PickRandom(List<Norma> pool, int count)

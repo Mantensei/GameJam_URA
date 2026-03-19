@@ -37,6 +37,7 @@ namespace GameJam_URA.Prototype
 
         void TryComment()
         {
+            _ura_hub.Commenter?.OpenCommentView();
         }
     }
 }

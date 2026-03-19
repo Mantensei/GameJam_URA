@@ -13,6 +13,13 @@ MonoBehaviour:
   m_Name: Norma_Tutorial
   m_EditorClassIdentifier: Assembly-CSharp::GameJam_URA.NormaData
   children:
-  - {fileID: 11400000, guid: 2d3f4dc99ac4d3c48bff36653f979ff2, type: 2}
-  - {fileID: 11400000, guid: 2fc84cd9543dfc24389607b098cd377b, type: 2}
+  - {fileID: 11400000, guid: 93bb9ab2b2d48ad459040c41f226d4ca, type: 2}
+  - {fileID: 11400000, guid: 03ed580c7dfe0e242bbb0834100fe6cc, type: 2}
   - {fileID: 11400000, guid: 54978075b47801347bb6b0597d4596ca, type: 2}
+  - {fileID: 11400000, guid: f33439fd0d42a874c98aefa5a5bd9a88, type: 2}
+  - {fileID: 11400000, guid: 2d3f4dc99ac4d3c48bff36653f979ff2, type: 2}
+  - {fileID: 11400000, guid: 17e772e42da53874d9cb267a453c5e6f, type: 2}
+  - {fileID: 11400000, guid: 2fc84cd9543dfc24389607b098cd377b, type: 2}
+  - {fileID: 11400000, guid: facdc249f7e5fe94e951086b080dbe62, type: 2}
+  - {fileID: 11400000, guid: 0bfce2de8ae724f47b21113228d678ef, type: 2}
+  - {fileID: 11400000, guid: 79b0d48650aaa75459bbb2ab9ea9f336, type: 2}

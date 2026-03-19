@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
 using UnityEngine;
+using MantenseiLib;
 
 namespace GameJam_URA.UI
 {
@@ -24,7 +25,8 @@ namespace GameJam_URA.UI
         void InitData()
         {
             var stage = GameManager.Instance.CurrentStage;
-            stage.BuildStageData(out _, out _, out _menuItems);
+            _menuItems = stage.MenuList;
+            Debug.Log(_menuItems.JoinToString());
             _menuItemMap = new Dictionary<MenuNorma, VisualElement>();
         }
     }
@@ -45,7 +47,7 @@ namespace GameJam_URA.UI
 
         void OnSelectItem(MenuNorma menuItem)
         {
-            menuItem.IsCompleted = true;
+            menuItem.CompleteNorma();
             _menuItemMap[menuItem].AddToClassList(SoldClass);
             _menuItemMap[menuItem].SetEnabled(false);
         }
@@ -55,7 +57,7 @@ namespace GameJam_URA.UI
             var item = new VisualElement();
             item.AddToClassList(ListItemClass);
 
-            var nameLabel = new Label("・" + data.MenuItem.ItemName);
+            var nameLabel = new Label("・" + data.MenuItem.Name);
             nameLabel.AddToClassList(ItemLabelClass);
 
             var priceLabel = new Label("¥" + data.MenuItem.Price);

@@ -44,6 +44,82 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb061cb32bd204646a9e071c6b93151e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameJam_URA.Sitter
+--- !u!1 &1821360393411805556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 910283728750233800}
+  m_Layer: 0
+  m_Name: Commenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &910283728750233800
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821360393411805556}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2092707847958843164}
+  m_Father: {fileID: 9011630504508842326}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6395364068053870299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2092707847958843164}
+  - component: {fileID: 7127456542754868831}
+  m_Layer: 0
+  m_Name: Yuri
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2092707847958843164
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6395364068053870299}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 910283728750233800}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7127456542754868831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6395364068053870299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 946ba33e1b9cb524fa6f067dc6a07aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameJam_URA.Commenter
 --- !u!1 &7594752658998553281
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,6 +600,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7593365255724327686, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5630149276417238498}
+    - targetCorrespondingSourceObject: {fileID: 7593365255724327686, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910283728750233800}
     - targetCorrespondingSourceObject: {fileID: 4032583303295230051, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3252665199147938033}

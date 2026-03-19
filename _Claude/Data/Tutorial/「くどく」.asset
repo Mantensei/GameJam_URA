@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: "\u300C\u91CF\u304C\u591A\u3044\u300D"
+  m_Name: "\u300C\u304F\u3069\u304F\u300D"
   m_EditorClassIdentifier: Assembly-CSharp:GameJam_URA:CommentNorma
   comment:
-    text: "\u91CF\u304C\u591A\u3044"
+    text: "\u3053\u306E\u3042\u3068\u3054\u306F\u3093\u884C\u304B\u306A\u3044\uFF1F"

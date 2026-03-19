@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace GameJam_URA
@@ -11,8 +12,15 @@ namespace GameJam_URA
         public void GetAllNormas(List<Norma> result)
         {
             if (children == null) return;
-            foreach (var child in children)
-                ((INormaProvider)child).GetAllNormas(result);
+            var seen = new HashSet<string>();
+            foreach (var norma in children.OfType<INormaProvider>())
+            {
+                int before = result.Count;
+                norma.GetAllNormas(result);
+                for (int i = result.Count - 1; i >= before; i--)
+                    if (!seen.Add(result[i].name))
+                        result.RemoveAt(i);
+            }
         }
     }
 }
@@ -38,6 +46,7 @@ namespace GameJam_URA
         void ValidateChildren()
         {
             var prop = serializedObject.FindProperty("children");
+            var seen = new HashSet<Object>();
             for (int i = 0; i < prop.arraySize; i++)
             {
                 var obj = prop.GetArrayElementAtIndex(i).objectReferenceValue as ScriptableObject;
@@ -45,12 +54,17 @@ namespace GameJam_URA
 
                 if (!(obj is INormaProvider))
                 {
-                    Debug.LogWarning($"{obj.name} は INormaProvider を実装していないため除外されました");
+                    Debug.Log($"{obj.name} は INormaProvider を実装していないため除外されました");
                     prop.GetArrayElementAtIndex(i).objectReferenceValue = null;
                 }
                 else if (obj is NormaData data && WouldCauseCircle(data))
                 {
-                    Debug.LogWarning($"{obj.name} は循環参照になるため除外されました");
+                    Debug.Log($"{obj.name} は循環参照になるため除外されました");
+                    prop.GetArrayElementAtIndex(i).objectReferenceValue = null;
+                }
+                else if (!seen.Add(obj))
+                {
+                    Debug.Log($"{obj.name} は重複しているため除外されました");
                     prop.GetArrayElementAtIndex(i).objectReferenceValue = null;
                 }
             }
