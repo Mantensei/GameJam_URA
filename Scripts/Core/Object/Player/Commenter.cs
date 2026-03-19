@@ -34,7 +34,6 @@ namespace GameJam_URA
                     norma.CompleteNorma();
             }
             UIViewHub.Instance.SpeechBubble.Show(transform, comment);
-            Debug.Log($"[感想] {comment}");
         }
     }
 }
