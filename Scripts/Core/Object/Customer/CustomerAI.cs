@@ -183,7 +183,7 @@ namespace GameJam_URA
         {
             if (phase == Phase.Done) return;
 
-            UpdateComment();
+            // UpdateComment();
 
             var activeInterrupt = GetActiveInterrupt();
             if (activeInterrupt != null)
