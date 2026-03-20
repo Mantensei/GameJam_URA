@@ -21,7 +21,7 @@ namespace GameJam_URA
         string moveLabel;
 
         bool isRegular;
-        List<MenuItem> orderQueue = new List<MenuItem>();
+        List<IDishItem> orderQueue = new List<IDishItem>();
         int orderIndex;
 
         const float SitDownDuration = 1f;
@@ -30,15 +30,24 @@ namespace GameJam_URA
         const float LeaveDuration = 1f;
         const float ArrivalThreshold = 0.3f;
 
-        const int DummyOrderMin = 1;
-        const int DummyOrderMax = 3;
+        int budget;
+
+        List<string> commentQueue = new List<string>();
+        int commentIndex;
+        float commentTimer;
+        const float CommentCoolTime = 5f;
+        const float CommentInitialDelay = 3f;
+        const int MaxCommentCount = 3;
 
         List<ICustomerInterrupt> interrupts = new List<ICustomerInterrupt>();
 
         public void Setup(CustomerData data, StageData stage)
         {
             isRegular = data.IsRegular;
+            budget = stage.CustomerBudget;
             BuildOrderQueue(stage);
+            BuildCommentQueue(stage);
+            commentTimer = CommentInitialDelay;
         }
 
         void BuildOrderQueue(StageData stage)
@@ -46,60 +55,118 @@ namespace GameJam_URA
             orderQueue.Clear();
             orderIndex = 0;
 
-            var normaMenus = new List<MenuItem>();
-            var dobonMenus = new List<MenuItem>();
-            var dummyMenus = new List<MenuItem>();
+            var normaMenus = new List<IDishItem>();
+            var dobonMenus = new List<IDishItem>();
+            var stubMenus = new List<IDishItem>();
 
             var normaSet = new HashSet<string>();
-            foreach (var n in stage.Normas)
-                if (n is MenuNorma mn)
-                    normaSet.Add(mn.MenuItem.Name);
+            foreach (var task in stage.Normas)
+                if (task is IDishItem mn)
+                    normaSet.Add(mn.Name);
 
             var dobonSet = new HashSet<string>();
-            foreach (var d in stage.Dobons)
-                if (d is MenuNorma mn)
-                    dobonSet.Add(mn.MenuItem.Name);
+            foreach (var task in stage.Dobons)
+                if (task is IDishItem mn)
+                    dobonSet.Add(mn.Name);
 
             foreach (var menu in stage.MenuList)
             {
-                var item = menu.MenuItem;
-                if (normaSet.Contains(item.Name))
-                    normaMenus.Add(item);
-                else if (dobonSet.Contains(item.Name))
-                    dobonMenus.Add(item);
+                if (normaSet.Contains(menu.Name))
+                    normaMenus.Add(menu);
+                else if (dobonSet.Contains(menu.Name))
+                    dobonMenus.Add(menu);
                 else
-                    dummyMenus.Add(item);
+                    stubMenus.Add(menu);
+            }
+
+            int remaining = budget;
+
+            if (isRegular)
+            {
+                foreach (var menu in normaMenus)
+                {
+                    orderQueue.Add(menu);
+                    remaining -= menu.Price;
+                }
+                FillWithBudget(stubMenus, remaining);
+            }
+            else
+            {
+                var pool = new List<IDishItem>();
+                pool.AddRange(stubMenus);
+                pool.AddRange(dobonMenus);
+                FillWithBudget(pool, remaining);
+            }
+
+            orderQueue = new List<IDishItem>(orderQueue.Shuffle());
+        }
+
+        void FillWithBudget(List<IDishItem> pool, int remaining)
+        {
+            var used = new HashSet<string>();
+            foreach (var item in orderQueue)
+                used.Add(item.Name);
+
+            pool = new List<IDishItem>(pool.Shuffle());
+            foreach (var item in pool)
+            {
+                if (remaining < item.Price) continue;
+                if (used.Contains(item.Name)) continue;
+                orderQueue.Add(item);
+                used.Add(item.Name);
+                remaining -= item.Price;
+            }
+        }
+
+        void BuildCommentQueue(StageData stage)
+        {
+            commentQueue.Clear();
+            commentIndex = 0;
+
+            var normaTexts = new HashSet<string>();
+            foreach (var task in stage.Normas)
+                if (task is ICommentItem ci)
+                    normaTexts.Add(ci.Name);
+
+            var dobonTexts = new HashSet<string>();
+            foreach (var task in stage.Dobons)
+                if (task is ICommentItem ci)
+                    dobonTexts.Add(ci.Name);
+
+            var stubTexts = new List<string>();
+            foreach (var c in stage.CommentList)
+            {
+                if (!normaTexts.Contains(c.Name) && !dobonTexts.Contains(c.Name))
+                    stubTexts.Add(c.Name);
             }
 
             if (isRegular)
             {
-                orderQueue.AddRange(normaMenus);
-                int dummyCount = Random.Range(DummyOrderMin, DummyOrderMax + 1);
-                Shuffle(dummyMenus);
-                for (int i = 0; i < dummyCount && i < dummyMenus.Count; i++)
-                    orderQueue.Add(dummyMenus[i]);
+                foreach (var t in normaTexts)
+                    commentQueue.Add(t);
+
+                var shuffled = new List<string>(stubTexts.Shuffle());
+                foreach (var t in shuffled)
+                {
+                    if (commentQueue.Count >= MaxCommentCount) break;
+                    commentQueue.Add(t);
+                }
             }
             else
             {
-                int count = Random.Range(DummyOrderMin, DummyOrderMax + 1);
-                var pool = new List<MenuItem>();
-                pool.AddRange(dummyMenus);
-                pool.AddRange(dobonMenus);
-                Shuffle(pool);
-                for (int i = 0; i < count && i < pool.Count; i++)
-                    orderQueue.Add(pool[i]);
+                var pool = new List<string>();
+                foreach (var t in dobonTexts) pool.Add(t);
+                pool.AddRange(stubTexts);
+                pool = new List<string>(pool.Shuffle());
+
+                foreach (var t in pool)
+                {
+                    if (commentQueue.Count >= MaxCommentCount) break;
+                    commentQueue.Add(t);
+                }
             }
 
-            Shuffle(orderQueue);
-        }
-
-        static void Shuffle<T>(List<T> list)
-        {
-            for (int i = list.Count - 1; i > 0; i--)
-            {
-                int j = Random.Range(0, i + 1);
-                (list[i], list[j]) = (list[j], list[i]);
-            }
+            commentQueue = new List<string>(commentQueue.Shuffle());
         }
 
         public void RegisterInterrupt(ICustomerInterrupt interrupt)
@@ -115,6 +182,8 @@ namespace GameJam_URA
         void Update()
         {
             if (phase == Phase.Done) return;
+
+            UpdateComment();
 
             var activeInterrupt = GetActiveInterrupt();
             if (activeInterrupt != null)
@@ -165,6 +234,21 @@ namespace GameJam_URA
             phaseEntered = false;
         }
 
+        Commenter Commenter => hub.Commenter;
+
+        void UpdateComment()
+        {
+            if (commentIndex >= commentQueue.Count) return;
+
+            commentTimer -= Time.deltaTime;
+            if (commentTimer > 0f) return;
+
+            commentTimer = CommentCoolTime;
+
+            if (Commenter.TrySay(commentQueue[commentIndex]))
+                commentIndex++;
+        }
+
         void ShowBubble(string text, Color color)
         {
             var offset = new Vector3(Random.Range(-0.5f, 0.5f), 0.5f + Random.Range(0f, 0.5f), 0f);
@@ -177,7 +261,8 @@ namespace GameJam_URA
             });
         }
 
-        void ShowDebugBubble(string text) => ShowBubble(text, Color.red);
+        void ShowDebugBubble(string text) { }
+        // void ShowDebugBubble(string text) => ShowBubble(text, Color.red);
 
         void MoveTo(Vector2 target, string label)
         {
@@ -241,10 +326,7 @@ namespace GameJam_URA
             {
                 phaseEntered = true;
                 if (orderIndex < orderQueue.Count)
-                {
-                    var item = orderQueue[orderIndex];
-                    ShowDebugBubble($"注文：{item.Name}");
-                }
+                    ShowBubble(orderQueue[orderIndex].Name, Color.black);
             }
 
             phaseTimer += Time.deltaTime;

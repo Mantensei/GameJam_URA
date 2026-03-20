@@ -1,24 +1,25 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace GameJam_URA
 {
+    [Obsolete("SO基底。今後はTSV等からIUraTaskを生成すること")]
     [CreateAssetMenu(fileName = "NewNormaTable", menuName = "GameJam/NormaTable")]
-    public class NormaTable : ScriptableObject, INormaProvider
+    public class NormaTable : ScriptableObject, IUraTaskProvider
     {
-        //入れ子にしたかったが難しいので、広めの参照をもってカスタムエディターで整える
         [SerializeField] ScriptableObject[] children;
-        public void GetAllNormas(List<Norma> result)
+        public void GetAllTasks(List<IUraTask> result)
         {
             if (children == null) return;
             var seen = new HashSet<string>();
-            foreach (var norma in children.OfType<INormaProvider>())
+            foreach (var provider in children.OfType<IUraTaskProvider>())
             {
                 int before = result.Count;
-                norma.GetAllNormas(result);
+                provider.GetAllTasks(result);
                 for (int i = result.Count - 1; i >= before; i--)
-                    if (!seen.Add(result[i].name))
+                    if (!seen.Add(result[i].Name))
                         result.RemoveAt(i);
             }
         }
@@ -46,15 +47,15 @@ namespace GameJam_URA
         void ValidateChildren()
         {
             var prop = serializedObject.FindProperty("children");
-            var seen = new HashSet<Object>();
+            var seen = new HashSet<UnityEngine.Object>();
             for (int i = 0; i < prop.arraySize; i++)
             {
                 var obj = prop.GetArrayElementAtIndex(i).objectReferenceValue as ScriptableObject;
                 if (obj == null) continue;
 
-                if (!(obj is INormaProvider))
+                if (!(obj is IUraTaskProvider))
                 {
-                    Debug.Log($"{obj.name} は INormaProvider を実装していないため除外されました");
+                    Debug.Log($"{obj.name} は IUraTaskProvider を実装していないため除外されました");
                     prop.GetArrayElementAtIndex(i).objectReferenceValue = null;
                 }
                 else if (obj is NormaTable data && WouldCauseCircle(data))

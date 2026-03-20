@@ -25,7 +25,7 @@ namespace GameJam_URA
         GameManager()
         {
             stages = Resources.LoadAll<StageData>("Stages");
-            LoadStage(StageId.Tutorial);
+            LoadStage(StageId.Stage0);
         }
 
         public void LoadStage(StageId id)

@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 706104edb49e3d94e9762163baee838d, type: 3}
   m_Name: CustomerTable_Tutorial
   m_EditorClassIdentifier: Assembly-CSharp:GameJam_URA:CustomerTable
   customers:
+  - {fileID: 11400000, guid: e403bde6fb0fe7144bed84d9bc586adf, type: 2}
   - {fileID: 11400000, guid: e403bde6fb0fe7144bed84d9bc586adf, type: 2}

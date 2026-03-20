@@ -58,14 +58,14 @@ namespace GameJam_URA
             RuntimeDebugDisplay.LogPanel(TimePanel, "経過", FormatTime(elapsedTime));
             RuntimeDebugDisplay.LogPanel(TimePanel, "残り", FormatTime(remaining));
 
-            foreach (var n in stage.Normas)
-                RuntimeDebugDisplay.LogPanel(NormaPanel, n.name, n.IsCompleted ? "○" : "✗");
+            foreach (var task in stage.Normas)
+                RuntimeDebugDisplay.LogPanel(NormaPanel, task.Name, task.IsCompleted ? "○" : "✗");
 
-            foreach (var d in stage.Dobons)
-                RuntimeDebugDisplay.LogPanel(DobonPanel, d.name, d.IsCompleted ? "○" : "✗");
+            foreach (var task in stage.Dobons)
+                RuntimeDebugDisplay.LogPanel(DobonPanel, task.Name, task.IsCompleted ? "○" : "✗");
 
             foreach (var m in stage.MenuList)
-                RuntimeDebugDisplay.LogPanel(MenuPanel, m.MenuItem.Name, "¥" + m.MenuItem.Price);
+                RuntimeDebugDisplay.LogPanel(MenuPanel, m.Name, "¥" + m.Price);
 
             RuntimeDebugDisplay.LogPanel(MoneyPanel, "残金", "¥" + GameManager.Instance.CurrentMoney);
 

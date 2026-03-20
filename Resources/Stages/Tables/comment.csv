@@ -1,0 +1,8 @@
+stage_id,text,phase
+stage0,お腹すいた,BeforeEat
+stage0,いい匂い,BeforeEat
+stage0,何にしよう,BeforeEat
+stage0,うまい,AfterEat
+stage0,量が多い,AfterEat
+stage0,まずい,AfterEat
+stage0,また来る,AfterEat

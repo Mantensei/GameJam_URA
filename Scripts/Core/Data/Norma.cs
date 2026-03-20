@@ -1,28 +1,49 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameJam_URA
 {
-    public interface INormaProvider
+    public interface IUraTask
     {
-        void GetAllNormas(List<Norma> result);
+        string Name { get; }
+        bool IsCompleted { get; }
+        void Complete();
     }
 
-    public abstract class Norma : ScriptableObject, INormaProvider
+    public interface IDishItem : IUraTask
     {
+        int Price { get; }
+        string Category { get; }
+        bool IsSecretMenu { get; set; }
+    }
+
+    public interface ICommentItem : IUraTask
+    {
+        CommentPhase Phase { get; }
+    }
+
+    public interface IUraTaskProvider
+    {
+        void GetAllTasks(List<IUraTask> result);
+    }
+
+    [Obsolete("SO基底。今後はIUraTaskを直接実装すること")]
+    public abstract class Norma : ScriptableObject, IUraTask, IUraTaskProvider
+    {
+        public string Name => name;
         public bool IsCompleted { get; private set; }
 
         protected virtual void OnComplete() { }
-        public void CompleteNorma()
+        public void Complete()
         {
             IsCompleted = true;
             OnComplete();
         }
 
-        public void GetAllNormas(List<Norma> result)
+        public void GetAllTasks(List<IUraTask> result)
         {
             result.Add(Instantiate(this));
         }
     }
-
 }

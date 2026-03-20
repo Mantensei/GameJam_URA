@@ -3,26 +3,18 @@ using UnityEngine;
 
 namespace GameJam_URA
 {
-    [Serializable]
-    public class MenuItem
+    [Obsolete("SO基底。今後はDishItemを直接使用すること。IUraTaskProvider経由で取得")]
+    [CreateAssetMenu(fileName = "NewMenuNorma", menuName = "GameJam/MenuNorma")]
+    public class MenuNorma : Norma, IDishItem
     {
         [SerializeField] string itemName;
         [SerializeField] int price;
+        [SerializeField] string category;
 
-        public string Name => itemName;
-        public int Price => price;
-
+        int IDishItem.Price => price;
+        string IDishItem.Category => category;
         public bool IsSecretMenu { get; set; }
-    }
 
-    [CreateAssetMenu(fileName = "NewMenuNorma", menuName = "GameJam/MenuNorma")]
-    public class MenuNorma : Norma
-    {
-        [SerializeField] MenuItem menuItem;
-
-        public MenuItem MenuItem => menuItem;
-
-        public override string ToString() => menuItem.Name;
-
+        public override string ToString() => itemName;
     }
 }

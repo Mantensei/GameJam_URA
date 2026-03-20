@@ -38,9 +38,8 @@ namespace GameJam_URA.UI
             }
 
             int total = 0;
-            foreach (var norma in order)
+            foreach (var item in order)
             {
-                var item = norma.MenuItem;
                 var row = new VisualElement();
                 row.AddToClassList("register-order-item");
                 row.Add(new Label(item.Name));
@@ -63,21 +62,21 @@ namespace GameJam_URA.UI
 
             int foodCost = stage.MenuList
                 .Where(item => item.IsCompleted)
-                .Sum(item => item.MenuItem.Price);
+                .Sum(item => item.Price);
             gm.AddMoney(-foodCost);
             Debug.Log($"[会計] 食事代 ¥{foodCost} → 残金 ¥{gm.CurrentMoney}");
 
-            var completedDobons = stage.Dobons.Where(d => d.IsCompleted).ToArray();
+            var completedDobons = stage.Dobons.Where(t => t.IsCompleted).ToArray();
             bool dobon = completedDobons.Length > 0;
             if (dobon)
             {
                 int penalty = stage.DobonPenalty * completedDobons.Length;
                 gm.AddMoney(-penalty);
                 foreach (var d in completedDobons)
-                    Debug.Log($"[ドボン] {d.name}");
+                    Debug.Log($"[ドボン] {d.Name}");
                 Debug.Log($"[罰金] ドボン {completedDobons.Length}件 ¥{penalty} → 残金 ¥{gm.CurrentMoney}");
 
-                Debug.Log($"[当店にふさわしくない振る舞い] ({stage.Normas.Count(n => n.IsCompleted)}/{stage.Normas.Count})");
+                Debug.Log($"[当店にふさわしくない振る舞い] ({stage.Normas.Count(t => t.IsCompleted)}/{stage.Normas.Count})");
 
                 bool gameOver = gm.CurrentMoney <= 0;
                 if (gameOver)
@@ -85,12 +84,12 @@ namespace GameJam_URA.UI
             }
             else
             {
-                bool clear = !dobon && stage.Normas.All(n => n.IsCompleted);
+                bool clear = !dobon && stage.Normas.All(t => t.IsCompleted);
 
                 if (clear)
                     Debug.Log("[判定] 全ノルマ達成！クリア！");
                 else
-                    Debug.Log($"[判定] ノルマ未達成 ({stage.Normas.Count(n => n.IsCompleted)}/{stage.Normas.Count})");
+                    Debug.Log($"[判定] ノルマ未達成 ({stage.Normas.Count(t => t.IsCompleted)}/{stage.Normas.Count})");
 
             }
             Hide();

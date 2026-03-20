@@ -64,6 +64,6 @@ namespace GameJam_URA.Prototype
             UIViewHub.Instance.Comment.OnCommentSelected -= OnCommentSelected;
         }
 
-        void OnCommentSelected(string comment) => _ura_hub.Commenter.Say(comment);
+        void OnCommentSelected(string comment) => _ura_hub.Commenter.TrySay(comment);
     }
 }

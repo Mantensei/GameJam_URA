@@ -17,16 +17,16 @@ namespace GameJam_URA.UI
         const string ItemPriceClass = "menu-item-price";
         const string SoldClass = "menu-item-sold";
 
-        Dictionary<MenuNorma, VisualElement> _menuItemMap;
+        Dictionary<IDishItem, VisualElement> _menuItemMap;
 
-        List<MenuNorma> _menuItems;
-        public IReadOnlyList<MenuNorma> MenuItems => _menuItems;
+        List<IDishItem> _menuItems;
+        public IReadOnlyList<IDishItem> MenuItems => _menuItems;
 
         void InitData()
         {
             var stage = GameManager.Instance.CurrentStage;
             _menuItems = stage.MenuList;
-            _menuItemMap = new Dictionary<MenuNorma, VisualElement>();
+            _menuItemMap = new Dictionary<IDishItem, VisualElement>();
         }
     }
 
@@ -36,7 +36,7 @@ namespace GameJam_URA.UI
 
     public partial class MenuView
     {
-        public event Action<MenuNorma> OnOrderSelected;
+        public event Action<IDishItem> OnOrderSelected;
 
         protected override void OnShown()
         {
@@ -44,22 +44,22 @@ namespace GameJam_URA.UI
             InitBehavior();
         }
 
-        void OnSelectItem(MenuNorma menuItem)
+        void OnSelectItem(IDishItem menuItem)
         {
-            menuItem.CompleteNorma();
+            menuItem.Complete();
             _menuItemMap[menuItem].AddToClassList(SoldClass);
             _menuItemMap[menuItem].SetEnabled(false);
         }
 
-        VisualElement CreateMenuItemElement(MenuNorma data)
+        VisualElement CreateMenuItemElement(IDishItem data)
         {
             var item = new VisualElement();
             item.AddToClassList(ListItemClass);
 
-            var nameLabel = new Label("・" + data.MenuItem.Name);
+            var nameLabel = new Label("・" + data.Name);
             nameLabel.AddToClassList(ItemLabelClass);
 
-            var priceLabel = new Label("¥" + data.MenuItem.Price);
+            var priceLabel = new Label("¥" + data.Price);
             priceLabel.AddToClassList(ItemPriceClass);
 
             item.Add(nameLabel);
