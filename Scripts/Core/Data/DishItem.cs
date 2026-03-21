@@ -10,6 +10,7 @@ namespace GameJam_URA
         public string Category { get; }
         public bool IsSecretMenu { get; set; }
         public bool IsCompleted { get; private set; }
+        public UraTaskType TaskType { get; set; }
 
         public DishItem(string stageId, string name, int price, string category)
         {

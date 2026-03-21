@@ -1,8 +1,8 @@
 using System.Collections;
-using UnityEngine;
+using System.Collections.Generic;
 using System.Linq;
 using MantenseiLib;
-using System;
+using UnityEngine;
 
 namespace GameJam_URA
 {
@@ -10,44 +10,61 @@ namespace GameJam_URA
     {
         StageData stageData => GameManager.Instance.CurrentStage;
 
+        float elapsed;
+        float judgeTimer;
+        float judgeInterval = 1f;
+        float maxSpawnPercent = 0.5f;
+
         void Start()
         {
-            BuildSchedule();
+            StartCoroutine(LinearSpawn());
         }
 
-        void BuildSchedule()
+        void Update()
         {
-            float limit = stageData.TimeLimit;
-            var customers = stageData.Customers.Shuffle().ToArray();
-            for (int i = 0; i < customers.Length; i++)
+            elapsed += Time.deltaTime;
+            judgeTimer += Time.deltaTime;
+            if (judgeTimer < judgeInterval) return;
+            judgeTimer = 0f;
+
+            float t = Mathf.Clamp01(elapsed / stageData.TimeLimit);
+            float chance = t * (maxSpawnPercent / 100f);
+
+            if (Random.value < chance)
+                SpawnRandom();
+        }
+
+        IEnumerator LinearSpawn()
+        {
+            var menuList = new List<IDishItem>(stageData.MenuList.Shuffle());
+            float interval = stageData.TimeLimit / menuList.Count;
+
+            foreach (var dish in menuList)
             {
-                var customer = customers[i];
-                //最初の一人は必ず即座に出現させる
-                float time = i == 0 ? 0f : GetRandomValue(limit);
-                Spawn(customer, time);
+                SpawnCustomer(dish);
+                yield return new WaitForSeconds(interval);
             }
         }
 
-        float GetRandomValue(float value)
+        void SpawnRandom()
         {
-            return MathF.Max(0f, UnityEngine.Random.Range(0f, value) - value / 2);
+            var menuList = stageData.MenuList;
+            var dish = menuList[Random.Range(0, menuList.Count)];
+            SpawnCustomer(dish);
         }
 
-        void Spawn(CustomerData data, float delay)
+        void SpawnCustomer(IDishItem dish)
         {
-            StartCoroutine(SpawnDelayed(data, delay));
-        }
-
-        IEnumerator SpawnDelayed(CustomerData data, float delay)
-        {
-            yield return new WaitForSeconds(delay);
+            var prefabs = stageData.CustomerPrefabs;
+            var prefab = prefabs[Random.Range(0, prefabs.Length)];
+            bool isDobon = dish.TaskType == UraTaskType.Dobon;
 
             var spawnPoint = StageObjectHub.Instance.Interactables
                 .Where(x => x is Exit || x is Toilet)
                 .GetRandomElementOrDefault();
-            var instance = Instantiate(data.Prefab, spawnPoint.transform.position, Quaternion.identity);
-            var ai = instance.GetComponentInChildren<CustomerAI>();
-            ai.Setup(data, stageData);
+            var instance = Instantiate(prefab, spawnPoint.transform.position, Quaternion.identity);
+            var ai = instance.GetComponentInChildren<CustomerMineAI>();
+            ai.Setup(dish, isDobon);
         }
     }
 }

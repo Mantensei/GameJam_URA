@@ -57,7 +57,19 @@
     font-size: 7px;
     flex-shrink: 0;
     white-space: nowrap;
+    padding: 0;
+    margin: 0;
     margin-bottom: 4px;
+}
+
+.popup-list-item-label:hover {
+    background-color: rgba(43, 58, 78, 0.15);
+    border-radius: 2px;
+}
+
+.popup-close-btn:hover {
+    background-color: rgba(43, 58, 78, 0.15);
+    border-radius: 2px;
 }
 
 #comment-book {

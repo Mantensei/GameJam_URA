@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MantenseiLib;
 using UnityEngine;
@@ -8,24 +9,27 @@ namespace GameJam_URA
     public class StageData : ScriptableObject
     {
         [SerializeField] StageId stageId;
-        [SerializeField] int initialMoney;
-        [SerializeField] NormaTable normaData;
-        [SerializeField] int normaCount;
-        [SerializeField] NormaTable dobonData;
-        [SerializeField] int dobonCount;
-        [SerializeField] int commentNormaCount;
-        [SerializeField] int commentDobonCount;
-        [SerializeField] float timeLimit = 180f;
-        [SerializeField] CustomerTable customerTable;
-        [SerializeField] int regularCount = 1;
+        [SerializeField] float timeLimit = 60f;
+        [SerializeField] URA_PlayerReferenceHub[] customerPrefabs;
+        [SerializeField, Range(0f, 1f)] float dobonRate = 0.3f;
+
+        int initialMoney => 1000;
+        NormaTable normaData => default;
+        int normaCount => 3;
+        NormaTable dobonData => default;
+        int commentNormaCount => 1;
+        int commentDobonCount => 1;
+        CustomerTable customerTable => default;
+        int regularCount => 1;
+        int dobonCount => Mathf.RoundToInt(MenuList.Count * dobonRate);
+
         public StageId Id => stageId;
         public int InitialMoney => initialMoney;
         public float TimeLimit => timeLimit;
         public int DobonPenalty => stageId.DobonPenalty();
+        public int DobonCount => dobonCount;
         public List<ICommentItem> CommentList => builtCommentList;
-        public List<CustomerData> Customers => builtCustomers;
-
-        List<CustomerData> builtCustomers;
+        public URA_PlayerReferenceHub[] CustomerPrefabs => customerPrefabs;
 
         List<IUraTask> builtNormas;
         List<IUraTask> builtDobons;
@@ -34,14 +38,29 @@ namespace GameJam_URA
 
         public List<IUraTask> Normas => builtNormas;
         public List<IUraTask> Dobons => builtDobons;
-        public List<IDishItem> MenuList => builtMenuList;
-        public int CustomerBudget { get; private set; }
 
+        public List<IDishItem> MenuList
+        {
+            get
+            {
+                if (builtMenuList != null) return builtMenuList;
+                builtMenuList = new List<IDishItem>(StageDataLoader.LoadMenus(stageId));
+                foreach (var item in builtMenuList) item.TaskType = UraTaskType.None;
+                var indices = new List<int>();
+                for (int i = 0; i < builtMenuList.Count; i++) indices.Add(i);
+                indices = new List<int>(indices.Shuffle());
+                int count = Mathf.Min(dobonCount, indices.Count);
+                for (int i = 0; i < count; i++)
+                    builtMenuList[indices[i]].TaskType = UraTaskType.Dobon;
+                return builtMenuList;
+            }
+        }
+        [Obsolete("仮データプロパティで代替中。再利用時にSerializeFieldを復元すること")]
         public void Init()
         {
-            builtCustomers = new List<CustomerData>();
-            customerTable.GetAllCustomerData(builtCustomers);
-            AssignRegulars();
+            var customers = new List<CustomerData>();
+            customerTable.GetAllCustomerData(customers);
+            AssignRegulars(customers);
 
             builtNormas = new List<IUraTask>();
             builtDobons = new List<IUraTask>();
@@ -63,18 +82,6 @@ namespace GameJam_URA
                 builtDobons.Add(builtCommentList[i]);
 
             BuildNonMenuTasks();
-            CalcCustomerBudget();
-        }
-
-        void CalcCustomerBudget()
-        {
-            int normaTotal = 0;
-            foreach (var task in builtNormas)
-                if (task is IDishItem dish)
-                    normaTotal += dish.Price;
-            int margin = 000;
-            int unit = 500;
-            CustomerBudget = (normaTotal + margin + unit - 1) / unit * unit;
         }
 
         void BuildNonMenuTasks()
@@ -99,12 +106,12 @@ namespace GameJam_URA
             builtDobons.AddRange(dobonPool);
         }
 
-        void AssignRegulars()
+        void AssignRegulars(List<CustomerData> customers)
         {
-            builtCustomers = new List<CustomerData>(builtCustomers.Shuffle());
-            int count = Mathf.Min(regularCount, builtCustomers.Count);
-            for (int i = 0; i < builtCustomers.Count; i++)
-                builtCustomers[i].IsRegular = i < count;
+            customers = new List<CustomerData>(customers.Shuffle());
+            int count = Mathf.Min(regularCount, customers.Count);
+            for (int i = 0; i < customers.Count; i++)
+                customers[i].IsRegular = i < count;
         }
     }
 }

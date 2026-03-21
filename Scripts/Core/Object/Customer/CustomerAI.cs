@@ -7,7 +7,7 @@ namespace GameJam_URA
 {
     public class CustomerAI : MonoBehaviour
     {
-        enum Phase { SitDown, Order, Eat, Leave, Done }
+        enum Phase { SitDown, Order, Eat, MineTrigger, Leave, Done }
 
         [Parent]
         URA_PlayerReferenceHub hub;
@@ -20,153 +20,20 @@ namespace GameJam_URA
         Vector2 moveTarget;
         string moveLabel;
 
-        bool isRegular;
-        List<IDishItem> orderQueue = new List<IDishItem>();
-        int orderIndex;
+        IDishItem mineDish;
 
         const float SitDownDuration = 1f;
         const float OrderDuration = 1.5f;
         const float EatDuration = 2f;
+        const float MineTriggerDuration = 1.5f;
         const float LeaveDuration = 1f;
         const float ArrivalThreshold = 0.3f;
 
-        int budget;
-
-        List<string> commentQueue = new List<string>();
-        int commentIndex;
-        float commentTimer;
-        const float CommentCoolTime = 5f;
-        const float CommentInitialDelay = 3f;
-        const int MaxCommentCount = 3;
-
         List<ICustomerInterrupt> interrupts = new List<ICustomerInterrupt>();
 
-        public void Setup(CustomerData data, StageData stage)
+        public void Setup(CustomerData data, IDishItem mineDish)
         {
-            isRegular = data.IsRegular;
-            budget = stage.CustomerBudget;
-            BuildOrderQueue(stage);
-            BuildCommentQueue(stage);
-            commentTimer = CommentInitialDelay;
-        }
-
-        void BuildOrderQueue(StageData stage)
-        {
-            orderQueue.Clear();
-            orderIndex = 0;
-
-            var normaMenus = new List<IDishItem>();
-            var dobonMenus = new List<IDishItem>();
-            var stubMenus = new List<IDishItem>();
-
-            var normaSet = new HashSet<string>();
-            foreach (var task in stage.Normas)
-                if (task is IDishItem mn)
-                    normaSet.Add(mn.Name);
-
-            var dobonSet = new HashSet<string>();
-            foreach (var task in stage.Dobons)
-                if (task is IDishItem mn)
-                    dobonSet.Add(mn.Name);
-
-            foreach (var menu in stage.MenuList)
-            {
-                if (normaSet.Contains(menu.Name))
-                    normaMenus.Add(menu);
-                else if (dobonSet.Contains(menu.Name))
-                    dobonMenus.Add(menu);
-                else
-                    stubMenus.Add(menu);
-            }
-
-            int remaining = budget;
-
-            if (isRegular)
-            {
-                foreach (var menu in normaMenus)
-                {
-                    orderQueue.Add(menu);
-                    remaining -= menu.Price;
-                }
-                FillWithBudget(stubMenus, remaining);
-            }
-            else
-            {
-                var pool = new List<IDishItem>();
-                pool.AddRange(stubMenus);
-                pool.AddRange(dobonMenus);
-                FillWithBudget(pool, remaining);
-            }
-
-            orderQueue = new List<IDishItem>(orderQueue.Shuffle());
-        }
-
-        void FillWithBudget(List<IDishItem> pool, int remaining)
-        {
-            var used = new HashSet<string>();
-            foreach (var item in orderQueue)
-                used.Add(item.Name);
-
-            pool = new List<IDishItem>(pool.Shuffle());
-            foreach (var item in pool)
-            {
-                if (remaining < item.Price) continue;
-                if (used.Contains(item.Name)) continue;
-                orderQueue.Add(item);
-                used.Add(item.Name);
-                remaining -= item.Price;
-            }
-        }
-
-        void BuildCommentQueue(StageData stage)
-        {
-            commentQueue.Clear();
-            commentIndex = 0;
-
-            var normaTexts = new HashSet<string>();
-            foreach (var task in stage.Normas)
-                if (task is ICommentItem ci)
-                    normaTexts.Add(ci.Name);
-
-            var dobonTexts = new HashSet<string>();
-            foreach (var task in stage.Dobons)
-                if (task is ICommentItem ci)
-                    dobonTexts.Add(ci.Name);
-
-            var stubTexts = new List<string>();
-            foreach (var c in stage.CommentList)
-            {
-                if (!normaTexts.Contains(c.Name) && !dobonTexts.Contains(c.Name))
-                    stubTexts.Add(c.Name);
-            }
-
-            if (isRegular)
-            {
-                foreach (var t in normaTexts)
-                    commentQueue.Add(t);
-
-                var shuffled = new List<string>(stubTexts.Shuffle());
-                foreach (var t in shuffled)
-                {
-                    if (commentQueue.Count >= MaxCommentCount) break;
-                    commentQueue.Add(t);
-                }
-            }
-            else
-            {
-                var pool = new List<string>();
-                foreach (var t in dobonTexts) pool.Add(t);
-                pool.AddRange(stubTexts);
-                pool = new List<string>(pool.Shuffle());
-
-                foreach (var t in pool)
-                {
-                    if (commentQueue.Count >= MaxCommentCount) break;
-                    commentQueue.Add(t);
-                }
-            }
-
-            commentQueue = new List<string>(commentQueue.Shuffle());
+            this.mineDish = mineDish;
         }
 
         public void RegisterInterrupt(ICustomerInterrupt interrupt)
@@ -182,8 +49,6 @@ namespace GameJam_URA
         void Update()
         {
             if (phase == Phase.Done) return;
-
-            // UpdateComment();
 
             var activeInterrupt = GetActiveInterrupt();
             if (activeInterrupt != null)
@@ -223,6 +88,7 @@ namespace GameJam_URA
                 case Phase.SitDown: UpdateSitDown(); break;
                 case Phase.Order: UpdateOrder(); break;
                 case Phase.Eat: UpdateEat(); break;
+                case Phase.MineTrigger: UpdateMineTrigger(); break;
                 case Phase.Leave: UpdateLeave(); break;
             }
         }
@@ -232,21 +98,6 @@ namespace GameJam_URA
             phase = next;
             phaseTimer = 0f;
             phaseEntered = false;
-        }
-
-        Commenter Commenter => hub.Commenter;
-
-        void UpdateComment()
-        {
-            if (commentIndex >= commentQueue.Count) return;
-
-            commentTimer -= Time.deltaTime;
-            if (commentTimer > 0f) return;
-
-            commentTimer = CommentCoolTime;
-
-            if (Commenter.TrySay(commentQueue[commentIndex]))
-                commentIndex++;
         }
 
         void ShowBubble(string text, Color color)
@@ -261,15 +112,11 @@ namespace GameJam_URA
             });
         }
 
-        void ShowDebugBubble(string text) { }
-        // void ShowDebugBubble(string text) => ShowBubble(text, Color.red);
-
         void MoveTo(Vector2 target, string label)
         {
             moveTarget = target;
             moveLabel = label;
             moving = true;
-            ShowDebugBubble($"{label}に向かう");
         }
 
         void UpdateMove()
@@ -279,7 +126,6 @@ namespace GameJam_URA
             {
                 Mover?.Move(new MoveCommand(0, 0));
                 moving = false;
-                ShowDebugBubble($"{moveLabel}に着いた");
                 return;
             }
             float dir = diff > 0 ? 1f : -1f;
@@ -325,8 +171,7 @@ namespace GameJam_URA
             if (!phaseEntered)
             {
                 phaseEntered = true;
-                if (orderIndex < orderQueue.Count)
-                    ShowBubble(orderQueue[orderIndex].Name, Color.black);
+                ShowBubble(mineDish.Name, Color.black);
             }
 
             phaseTimer += Time.deltaTime;
@@ -339,21 +184,26 @@ namespace GameJam_URA
             if (!phaseEntered)
             {
                 phaseEntered = true;
-                if (orderIndex < orderQueue.Count)
-                    ShowDebugBubble($"食事中：{orderQueue[orderIndex].Name}");
             }
 
             phaseTimer += Time.deltaTime;
             if (phaseTimer >= EatDuration)
+                EnterPhase(Phase.MineTrigger);
+        }
+
+        void UpdateMineTrigger()
+        {
+            if (!phaseEntered)
             {
-                orderIndex++;
-                if (orderIndex < orderQueue.Count)
-                    EnterPhase(Phase.Order);
-                else
-                {
-                    MoveTo(GetPosition(PickExit()), "出口");
-                    EnterPhase(Phase.Leave);
-                }
+                phaseEntered = true;
+                ShowBubble("!!!", Color.red);
+            }
+
+            phaseTimer += Time.deltaTime;
+            if (phaseTimer >= MineTriggerDuration)
+            {
+                MoveTo(GetPosition(PickExit()), "出口");
+                EnterPhase(Phase.Leave);
             }
         }
 
@@ -362,7 +212,6 @@ namespace GameJam_URA
             if (!phaseEntered)
             {
                 phaseEntered = true;
-                ShowDebugBubble("退店");
             }
 
             phaseTimer += Time.deltaTime;

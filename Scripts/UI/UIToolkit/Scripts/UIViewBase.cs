@@ -8,6 +8,7 @@ namespace GameJam_URA.UI
 {
     public enum UIViewType
     {
+        TitleScreen,
         GameHUD,
         Menu,
         Comment,

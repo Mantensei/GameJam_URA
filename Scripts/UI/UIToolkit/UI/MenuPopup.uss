@@ -57,11 +57,12 @@
     font-size: 7px;
     flex-shrink: 0;
     white-space: nowrap;
-    margin-bottom: 4px;
+    padding: 0;
+    margin: 0;
 }
 
 #menu-overlay {
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.95);
 }
 
 #menu-book {
@@ -107,6 +108,9 @@
     font-size: 7px;
     margin-left: auto;
     flex-shrink: 0;
+    padding: 0;
+    margin: 0;
+    margin-left: auto;
 }
 
 #menu-divider {
@@ -114,6 +118,24 @@
     background-color: #999;
 }
 
+.popup-list-item:hover {
+    background-color: rgba(43, 58, 78, 0.15);
+    border-radius: 2px;
+}
+
+.popup-close-btn:hover {
+    background-color: rgba(43, 58, 78, 0.15);
+    border-radius: 2px;
+}
+
 .menu-item-sold {
     opacity: 0.4;
+}
+
+.menu-item-order .popup-list-item-label {
+    -unity-font-style: bold;
+}
+
+.menu-item-dobon .popup-list-item-label {
+    -unity-font-style: bold;
 }

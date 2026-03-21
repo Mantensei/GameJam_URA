@@ -99,7 +99,29 @@
     font-size: 14px;
 }
 
+#menu-open-btn {
+    align-self: flex-start;
+    flex-grow: 1;
+    width: auto;
+    height: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    flex-direction: row;
+    margin: 8px;
+}
+
+#menu-open-btn:hover {
+    background-color: #e0e0d8;
+}
+
+#comment-btn {
+    position: absolute;
+    left: -9999px;
+}
+
 #action-btn {
+    position: absolute;
+    left: -9999px;
     height: 32px;
     padding-left: 10px;
     padding-right: 10px;
@@ -119,4 +141,16 @@
 .action-text {
     font-size: 13px;
     -unity-font-style: bold;
+}
+
+.key-guide:hover {
+    background-color: #e0e0d8;
+}
+
+#menu-btn:hover {
+    background-color: #e0e0d8;
+}
+
+#action-btn:hover {
+    background-color: #e0e0d8;
 }

@@ -31,9 +31,7 @@ namespace GameJam_URA
         void OnTargetChanged(IInteractable target)
         {
             var label = target.Safe()?.ActiontLabel ?? "...";
-#if UNITY_EDITOR
-            MantenseiLib.Editor.DebugFileLogger.Log("gameplay", "Interactor", "Target changed: " + label);
-#endif
+            MantenseiDebug.DebugFileLogger.Log("gameplay", "Interactor", "Target changed: " + label);
             UIViewHub.Instance.GameHUD.SetActionLabel(label);
         }
 

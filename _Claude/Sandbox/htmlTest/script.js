@@ -21,7 +21,13 @@ var popups = [
     'register-popup',
 ];
 
-var activePopup = popups[0];
+var screens = [
+    'title-screen',
+    'novel-screen',
+];
+
+var allOverlays = popups.concat(screens);
+var activeIndex = 0;
 
 window.addEventListener('resize', scaleApp);
 window.addEventListener('load', function() {
@@ -32,24 +38,35 @@ window.addEventListener('load', function() {
     popups.forEach(function(name) {
         loads.push(loadHTML(name + '.html', name + '-container'));
     });
+    screens.forEach(function(name) {
+        loads.push(loadHTML(name + '.html', name + '-container'));
+    });
     Promise.all(loads).then(function() {
-        showPopup(activePopup);
+        showOverlay(activeIndex);
         scaleApp();
     });
 });
 
-function showPopup(name) {
-    popups.forEach(function(p) {
-        var el = document.getElementById(p.replace('-popup', '-overlay'));
-        if (el) el.style.display = (p === name) ? 'flex' : 'none';
+function getOverlayElement(name) {
+    if (name.indexOf('-popup') !== -1) {
+        return document.getElementById(name.replace('-popup', '-overlay'));
+    }
+    return document.getElementById(name);
+}
+
+function showOverlay(idx) {
+    allOverlays.forEach(function(name) {
+        var el = getOverlayElement(name);
+        if (el) el.style.display = 'none';
     });
+    var el = getOverlayElement(allOverlays[idx]);
+    if (el) el.style.display = 'flex';
 }
 
 window.addEventListener('keydown', function(e) {
     if (e.key === 'Tab') {
         e.preventDefault();
-        var idx = popups.indexOf(activePopup);
-        activePopup = popups[(idx + 1) % popups.length];
-        showPopup(activePopup);
+        activeIndex = (activeIndex + 1) % allOverlays.length;
+        showOverlay(activeIndex);
     }
 });

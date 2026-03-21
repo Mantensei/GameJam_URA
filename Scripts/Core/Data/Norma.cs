@@ -4,10 +4,14 @@ using UnityEngine;
 
 namespace GameJam_URA
 {
+    public enum UraTaskType { None, Norma, Dobon }
+    public enum PriceRange { Low, Medium, High }
+
     public interface IUraTask
     {
         string Name { get; }
         bool IsCompleted { get; }
+        UraTaskType TaskType { get; set; }
         void Complete();
     }
 
@@ -33,6 +37,7 @@ namespace GameJam_URA
     {
         public string Name => name;
         public bool IsCompleted { get; private set; }
+        public UraTaskType TaskType { get; set; }
 
         protected virtual void OnComplete() { }
         public void Complete()

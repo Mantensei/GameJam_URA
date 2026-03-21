@@ -11,6 +11,7 @@ namespace GameJam_URA.UI
 
         T Get<T>() where T : class, IUIView => Views.OfType<T>().First();
 
+        public TitleScreenView TitleScreen => Get<TitleScreenView>();
         public GameHUDView GameHUD => Get<GameHUDView>();
         public MenuView Menu => Get<MenuView>();
         public CommentView Comment => Get<CommentView>();

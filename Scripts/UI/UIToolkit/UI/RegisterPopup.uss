@@ -109,6 +109,16 @@
     margin-bottom: 6px;
 }
 
+.register-list-item:hover {
+    background-color: rgba(43, 58, 78, 0.15);
+    border-radius: 2px;
+}
+
+.book-footer:hover {
+    background-color: rgba(43, 58, 78, 0.15);
+    border-radius: 2px;
+}
+
 #register-character {
     width: 100px;
     align-items: flex-end;

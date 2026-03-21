@@ -18,6 +18,9 @@ namespace GameJam_URA.UI
         [GetComponent]
         CanvasGroup CanvasGroup { get; set; }
 
+        [GetComponent]
+        Canvas Canvas { get; set; }
+
         SpeechBubbleCommand command;
 
         public void Show(SpeechBubbleCommand command)
@@ -31,6 +34,7 @@ namespace GameJam_URA.UI
         IEnumerator ShowRoutine()
         {
             yield return null;
+            Canvas.sortingOrder = command.SortingOrder;
             transform.localPosition = command.Offset;
             transform.SetParent(null);
             Label.text = command.Text;
@@ -50,6 +54,46 @@ namespace GameJam_URA.UI
 
         void PlayEffect()
         {
+            PlayEffect_FixedSize();
+        }
+
+        void PlayEffect_FixedSize()
+        {
+            var bgRT = Background.rectTransform;
+            bgRT.anchorMin = new Vector2(0.5f, 0.5f);
+            bgRT.anchorMax = new Vector2(0.5f, 0.5f);
+            bgRT.pivot = new Vector2(0.5f, 0.5f);
+
+            Label.text = command.Text;
+            Label.maxVisibleCharacters = int.MaxValue;
+            FitBackground();
+
+            Label.maxVisibleCharacters = 0;
+
+            float revealDuration = command.Text.Length * charInterval;
+            float revealStart = preDelay;
+
+            DOTween.Sequence()
+                .AppendInterval(revealStart)
+                .Append(DOTween.To(
+                    () => Label.maxVisibleCharacters,
+                    x => Label.maxVisibleCharacters = x,
+                    command.Text.Length,
+                    revealDuration
+                ).SetEase(Ease.Linear));
+
+            float totalLifetime = revealStart + revealDuration + command.Duration;
+            transform.DOMoveY(transform.position.y + flyUpDistance, totalLifetime)
+                .SetEase(Ease.OutQuad)
+                .OnComplete(() =>
+                {
+                    CanvasGroup.alpha = 0f;
+                    Destroy(gameObject);
+                });
+        }
+
+        void PlayEffect_TypeWriter()
+        {
             var bgRT = Background.rectTransform;
             bgRT.anchorMin = new Vector2(0.5f, 0.5f);
             bgRT.anchorMax = new Vector2(0.5f, 0.5f);
@@ -61,7 +105,6 @@ namespace GameJam_URA.UI
 
             float revealDuration = command.Text.Length * charInterval;
             float revealStart = preDelay;
-            float flyStart = revealStart + revealDuration + command.Duration;
 
             DOTween.Sequence()
                 .AppendInterval(revealStart)

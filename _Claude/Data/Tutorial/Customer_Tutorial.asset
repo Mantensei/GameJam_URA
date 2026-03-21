@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: Customer_Tutorial
   m_EditorClassIdentifier: Assembly-CSharp:GameJam_URA:CustomerData
-  customerTimeline: {fileID: 11400000, guid: a45a05c245559ce47b9614fe9d792965, type: 2}
+  customerTimeline: {fileID: 11400000, guid: 143ffeb8a7767d644b9ca6cab3bf54ba, type: 2}
   customerPrefab: {fileID: 1552000818523828337, guid: d255fee9cc46ffe4c9318df687b1ed12, type: 3}

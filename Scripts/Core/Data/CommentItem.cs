@@ -11,6 +11,7 @@ namespace GameJam_URA
         public string Name { get; }
         public CommentPhase Phase { get; }
         public bool IsCompleted { get; private set; }
+        public UraTaskType TaskType { get; set; }
 
         public CommentItem(string stageId, string text, CommentPhase phase)
         {

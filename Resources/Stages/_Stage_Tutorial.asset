@@ -13,11 +13,7 @@ MonoBehaviour:
   m_Name: _Stage_Tutorial
   m_EditorClassIdentifier: Assembly-CSharp::GameJam_URA.StageData
   stageId: 0
-  initialMoney: 3500
-  normaData: {fileID: 11400000, guid: 30e44f9a303781941b9a4a437adcfb8f, type: 2}
-  normaCount: 2
-  dobonData: {fileID: 11400000, guid: 208745c151d76d24c9d0ef61f92ac456, type: 2}
-  dobonCount: 1
-  menuCount: 6
-  timeLimit: 180
-  customerTable: {fileID: 11400000, guid: 454d036aa649456448cd1a631b2dc449, type: 2}
+  timeLimit: 60
+  customerPrefabs:
+  - {fileID: 1552000818523828337, guid: d255fee9cc46ffe4c9318df687b1ed12, type: 3}
+  dobonRate: 0.3

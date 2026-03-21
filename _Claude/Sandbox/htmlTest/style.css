@@ -89,7 +89,7 @@ body {
 
 #game-area {
     flex: 1;
-    background: #00ff00;
+    background: url('Back_test.png') center/cover no-repeat;
 }
 
 #bottom-bar {
@@ -307,4 +307,72 @@ body {
     height: 90%;
     background: #ccc;
     border-radius: 35px 35px 0 0;
+}
+
+.screen-mode {
+    position: absolute;
+    top: var(--top-bar-height);
+    left: 0;
+    width: 100%;
+    bottom: var(--bottom-bar-height);
+    display: none;
+}
+
+#title-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0 30px 0;
+}
+
+#title-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.title-btn {
+    font-size: var(--font-medium);
+    font-family: sans-serif;
+    color: #000;
+    background: #fff;
+    border: 2px solid #333;
+    padding: 4px 24px;
+    cursor: pointer;
+}
+
+#title-howto-popup {
+    order: -1;
+    background: #fff;
+    border: 2px solid #333;
+    padding: 10px 16px;
+    width: 280px;
+    font-size: var(--font-small);
+    line-height: 1.8;
+}
+
+#title-howto-title {
+    text-align: center;
+    font-size: var(--font-medium);
+    margin-bottom: 6px;
+}
+
+#novel-screen {
+    bottom: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 16px;
+}
+
+#novel-textbox {
+    width: 100%;
+    height: 80px;
+    background: #ffffff;
+    border: 3px solid #3a7ca5;
+    padding: 10px 14px;
+    font-size: var(--font-large);
+    line-height: 1.6;
 }

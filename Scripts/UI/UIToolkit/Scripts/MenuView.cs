@@ -16,8 +16,13 @@ namespace GameJam_URA.UI
         const string ItemLabelClass = "popup-list-item-label";
         const string ItemPriceClass = "menu-item-price";
         const string SoldClass = "menu-item-sold";
+        const string OrderClass = "menu-item-order";
+        const string DobonClass = "menu-item-dobon";
+
+        enum MarkState { Neutral, Order, Dobon }
 
         Dictionary<IDishItem, VisualElement> _menuItemMap;
+        Dictionary<IDishItem, MarkState> _menuItemStates;
 
         List<IDishItem> _menuItems;
         public IReadOnlyList<IDishItem> MenuItems => _menuItems;
@@ -27,6 +32,7 @@ namespace GameJam_URA.UI
             var stage = GameManager.Instance.CurrentStage;
             _menuItems = stage.MenuList;
             _menuItemMap = new Dictionary<IDishItem, VisualElement>();
+            _menuItemStates ??= new Dictionary<IDishItem, MarkState>();
         }
     }
 
@@ -44,11 +50,21 @@ namespace GameJam_URA.UI
             InitBehavior();
         }
 
+        const int FavorPerSafe = 10;
+        const int FavorPerDobon = -25;
+
         void OnSelectItem(IDishItem menuItem)
         {
             menuItem.Complete();
-            _menuItemMap[menuItem].AddToClassList(SoldClass);
-            _menuItemMap[menuItem].SetEnabled(false);
+
+            bool isDobon = menuItem.TaskType == UraTaskType.Dobon;
+            int delta = isDobon ? FavorPerDobon : FavorPerSafe;
+            var gm = GameManager.Instance;
+            gm.AddFavor(delta);
+
+            Debug.Log($"[注文] {menuItem.Name} → 好感度{(delta >= 0 ? "+" : "")}{delta} (現在: {gm.CurrentFavor})");
+
+            Hide();
         }
 
         VisualElement CreateMenuItemElement(IDishItem data)
@@ -56,8 +72,9 @@ namespace GameJam_URA.UI
             var item = new VisualElement();
             item.AddToClassList(ListItemClass);
 
-            var nameLabel = new Label("・" + data.Name);
+            var nameLabel = new Label("　" + data.Name + data.CategorySymbol());
             nameLabel.AddToClassList(ItemLabelClass);
+            nameLabel.style.color = data.CategoryColor();
 
             var priceLabel = new Label("¥" + data.Price);
             priceLabel.AddToClassList(ItemPriceClass);
@@ -87,12 +104,75 @@ namespace GameJam_URA.UI
 
             foreach (var menuItem in _menuItems)
             {
-                _menuItemMap[menuItem].RegisterCallback<ClickEvent>(_ =>
+                if (!_menuItemStates.ContainsKey(menuItem))
+                    _menuItemStates[menuItem] = MarkState.Neutral;
+
+                ApplyMark(menuItem);
+
+                _menuItemMap[menuItem].RegisterCallback<PointerDownEvent>(e =>
                 {
                     if (menuItem.IsCompleted) return;
-                    OnSelectItem(menuItem);
-                    OnOrderSelected?.Invoke(menuItem);
+                    if (e.pointerType == UnityEngine.UIElements.PointerType.touch)
+                    {
+                        CycleMark(menuItem);
+                        return;
+                    }
+                    switch (e.button)
+                    {
+                        case 0: SetMark(menuItem, MarkState.Order); break;
+                        case 1: SetMark(menuItem, MarkState.Dobon); break;
+                        case 2: SetMark(menuItem, MarkState.Neutral); break;
+                    }
                 });
+            }
+
+            Root.Q<Label>("menu-close-btn").RegisterCallback<ClickEvent>(_ => Hide());
+
+            var overlay = Root.Q("menu-overlay");
+            overlay.RegisterCallback<ClickEvent>(e =>
+            {
+                if (e.target == overlay) Hide();
+            });
+        }
+
+        void SetMark(IDishItem item, MarkState state)
+        {
+            _menuItemStates[item] = state;
+            ApplyMark(item);
+        }
+
+        void CycleMark(IDishItem item)
+        {
+            var next = _menuItemStates[item] switch
+            {
+                MarkState.Neutral => MarkState.Order,
+                MarkState.Order => MarkState.Dobon,
+                _ => MarkState.Neutral,
+            };
+            SetMark(item, next);
+        }
+
+        void ApplyMark(IDishItem item)
+        {
+            var element = _menuItemMap[item];
+            var state = _menuItemStates[item];
+
+            element.RemoveFromClassList(OrderClass);
+            element.RemoveFromClassList(DobonClass);
+
+            var label = element.Q<Label>(className: ItemLabelClass);
+            var prefix = state switch
+            {
+                MarkState.Order => "○",
+                MarkState.Dobon => "×",
+                _ => "　",
+            };
+            label.text = prefix + item.Name + item.CategorySymbol();
+
+            switch (state)
+            {
+                case MarkState.Order: element.AddToClassList(OrderClass); break;
+                case MarkState.Dobon: element.AddToClassList(DobonClass); break;
             }
         }
     }

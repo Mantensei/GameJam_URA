@@ -1,0 +1,28 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements"
+         xmlns:uie="UnityEditor.UIElements">
+    <Style src="TitleScreen.uss" />
+
+    <ui:VisualElement name="title-screen" picking-mode="Ignore">
+
+        <ui:VisualElement name="title-howto-popup" class="title-popup hidden">
+            <ui:Label class="title-popup-title" text="あそびかた" />
+            <ui:Label class="popup-line" text="A/Dキーで左右に移動します。" />
+            <ui:Label class="popup-line" text="Enterキーで近くの人やものに話しかけます。" />
+            <ui:Label class="popup-line" text="Tキーでコメントを見ることができます。" />
+        </ui:VisualElement>
+
+        <ui:VisualElement name="title-credit-popup" class="title-popup hidden">
+            <ui:Label class="title-popup-title" text="クレジット" />
+            <ui:Label class="popup-line" text="企画・プログラム：xxx" />
+            <ui:Label class="popup-line" text="グラフィック：xxx" />
+            <ui:Label class="popup-line" text="サウンド：xxx" />
+        </ui:VisualElement>
+
+        <ui:VisualElement name="title-buttons">
+            <ui:Button name="btn-start" class="title-btn" text="スタート" />
+            <ui:Button name="btn-howto" class="title-btn" text="あそびかた" />
+            <ui:Button name="btn-credit" class="title-btn" text="クレジット" />
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+</ui:UXML>

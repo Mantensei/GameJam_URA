@@ -85,7 +85,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6063133388011977908}
-  - component: {fileID: 7450593384140730919}
+  - component: {fileID: 61411857136988496}
   m_Layer: 3
   m_Name: CPU
   m_TagString: Untagged
@@ -108,7 +108,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6734307123343046547}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7450593384140730919
+--- !u!114 &61411857136988496
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,9 +117,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3639089861101910639}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac12f944ae7d954469c2de4b8f3b18b7, type: 3}
+  m_Script: {fileID: 11500000, guid: dc5d6d7c7a0b0d94ea68402c1366a56b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameJam_URA.CustomerAI
+  m_EditorClassIdentifier: Assembly-CSharp::GameJam_URA.CustomerMineAI
 --- !u!1 &6395364068053870299
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,6 +669,10 @@ PrefabInstance:
     - target: {fileID: 4249537301698441268, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4295365130575972222, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
+      propertyPath: baseSpeed
+      value: 2.75
       objectReference: {fileID: 0}
     - target: {fileID: 4603053743510403476, guid: 8d456c932e139164a931f7fc902ff678, type: 3}
       propertyPath: m_Layer

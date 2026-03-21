@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using MantenseiDebug;
+using MantenseiLib;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -67,7 +67,7 @@ namespace GameJam_URA
             foreach (var m in stage.MenuList)
                 RuntimeDebugDisplay.LogPanel(MenuPanel, m.Name, "¥" + m.Price);
 
-            RuntimeDebugDisplay.LogPanel(MoneyPanel, "残金", "¥" + GameManager.Instance.CurrentMoney);
+            RuntimeDebugDisplay.LogPanel(MoneyPanel, "好感度", GameManager.Instance.CurrentFavor.ToString());
 
             // var timelines = stage.CustomerTimelineData.Timelines;
             // for (int i = 0; i < timelines.Length; i++)

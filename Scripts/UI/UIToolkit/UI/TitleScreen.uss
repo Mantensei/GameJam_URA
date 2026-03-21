@@ -1,0 +1,67 @@
+* {
+    -unity-font: url("project://database/Assets/MantenseiAssets/Fonts/MaruMinya/x12y12pxMaruMinya.ttf");
+}
+
+#title-screen {
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 30px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#title-buttons {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.title-btn {
+    font-size: 10px;
+    color: #000;
+    background-color: #fff;
+    border-width: 2px;
+    border-color: #333;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 24px;
+    padding-right: 24px;
+    margin-bottom: 6px;
+    -unity-font-style: normal;
+}
+
+.title-btn:hover {
+    background-color: #e0e0d8;
+}
+
+.title-btn:active {
+    background-color: #ccc;
+}
+
+.title-popup {
+    background-color: #fff;
+    border-width: 2px;
+    border-color: #333;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+    width: 280px;
+    margin-bottom: 8px;
+}
+
+.title-popup.hidden {
+    display: none;
+}
+
+.title-popup-title {
+    -unity-text-align: upper-center;
+    font-size: 10px;
+    -unity-font-style: bold;
+    margin-bottom: 6px;
+}
+
+.popup-line {
+    font-size: 7px;
+    margin-bottom: 4px;
+}

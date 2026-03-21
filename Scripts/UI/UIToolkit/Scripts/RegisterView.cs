@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,6 +8,9 @@ namespace GameJam_URA.UI
     public class RegisterView : UIViewBase
     {
         public override UIViewType ViewType => UIViewType.Register;
+
+        const int FavorPerSafe = 10;
+        const int FavorPerMine = -25;
 
         VisualElement _orderSummaryContainer;
 
@@ -37,61 +41,53 @@ namespace GameJam_URA.UI
                 return;
             }
 
-            int total = 0;
+            var dobonNames = BuildDobonNames();
+
             foreach (var item in order)
             {
+                bool isMine = dobonNames.Contains(item.Name);
                 var row = new VisualElement();
                 row.AddToClassList("register-order-item");
                 row.Add(new Label(item.Name));
-                row.Add(new Label("¥" + item.Price));
+                row.Add(new Label(isMine ? "×" : "○"));
                 _orderSummaryContainer.Add(row);
-                total += item.Price;
             }
+        }
 
-            var totalRow = new VisualElement();
-            totalRow.AddToClassList("register-order-total");
-            totalRow.Add(new Label("合計"));
-            totalRow.Add(new Label("¥" + total));
-            _orderSummaryContainer.Add(totalRow);
+        HashSet<string> BuildDobonNames()
+        {
+            var set = new HashSet<string>();
+            foreach (var task in GameManager.Instance.CurrentStage.Dobons)
+                if (task is IDishItem dish)
+                    set.Add(dish.Name);
+            return set;
         }
 
         void Checkout()
         {
             var gm = GameManager.Instance;
             var stage = gm.CurrentStage;
+            var dobonNames = BuildDobonNames();
 
-            int foodCost = stage.MenuList
-                .Where(item => item.IsCompleted)
-                .Sum(item => item.Price);
-            gm.AddMoney(-foodCost);
-            Debug.Log($"[会計] 食事代 ¥{foodCost} → 残金 ¥{gm.CurrentMoney}");
+            var orderedItems = stage.MenuList.Where(item => item.IsCompleted).ToArray();
 
-            var completedDobons = stage.Dobons.Where(t => t.IsCompleted).ToArray();
-            bool dobon = completedDobons.Length > 0;
-            if (dobon)
+            int totalFavor = 0;
+            foreach (var item in orderedItems)
             {
-                int penalty = stage.DobonPenalty * completedDobons.Length;
-                gm.AddMoney(-penalty);
-                foreach (var d in completedDobons)
-                    Debug.Log($"[ドボン] {d.Name}");
-                Debug.Log($"[罰金] ドボン {completedDobons.Length}件 ¥{penalty} → 残金 ¥{gm.CurrentMoney}");
-
-                Debug.Log($"[当店にふさわしくない振る舞い] ({stage.Normas.Count(t => t.IsCompleted)}/{stage.Normas.Count})");
-
-                bool gameOver = gm.CurrentMoney <= 0;
-                if (gameOver)
-                    Debug.Log("[ゲームオーバー] 所持金が尽きました");
+                bool isMine = dobonNames.Contains(item.Name);
+                int delta = isMine ? FavorPerMine : FavorPerSafe;
+                totalFavor += delta;
+                gm.AddFavor(delta);
+                Debug.Log($"[注文] {item.Name} → 好感度{(delta >= 0 ? "+" : "")}{delta} (現在: {gm.CurrentFavor})");
             }
-            else
-            {
-                bool clear = !dobon && stage.Normas.All(t => t.IsCompleted);
 
-                if (clear)
-                    Debug.Log("[判定] 全ノルマ達成！クリア！");
-                else
-                    Debug.Log($"[判定] ノルマ未達成 ({stage.Normas.Count(t => t.IsCompleted)}/{stage.Normas.Count})");
+            Debug.Log($"[会計完了] 好感度変動合計: {totalFavor} → 現在: {gm.CurrentFavor}");
 
-            }
+            if (gm.CurrentFavor >= 100)
+                Debug.Log("[クリア] 好感度MAX！");
+            else if (gm.CurrentFavor <= 0)
+                Debug.Log("[ゲームオーバー] 好感度が0になりました");
+
             Hide();
         }
     }

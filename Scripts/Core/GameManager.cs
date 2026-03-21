@@ -9,12 +9,14 @@ namespace GameJam_URA
 
         readonly StageData[] stages;
         StageData currentStage;
-        int currentMoney;
+        int currentFavor;
 
         public StageData CurrentStage => currentStage;
-        public int CurrentMoney => currentMoney;
+        public int CurrentFavor => currentFavor;
 
-        public void AddMoney(int amount) => currentMoney += amount;
+        const int InitialFavor = 50;
+
+        public void AddFavor(int amount) => currentFavor += amount;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         static void Initialize()
@@ -46,8 +48,7 @@ namespace GameJam_URA
         void LoadStage(StageData stage)
         {
             currentStage = stage;
-            stage.Init();
-            currentMoney = stage.InitialMoney;
+            currentFavor = InitialFavor;
         }
     }
 }
