@@ -1,0 +1,167 @@
+* {
+    -unity-font: url("project://database/Assets/MantenseiAssets/Fonts/MaruMinya/x12y12pxMaruMinya.ttf");
+}
+
+.popup-overlay {
+    position: absolute;
+    top: 28px;
+    left: 0;
+    right: 0;
+    bottom: 40px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#judge-body {
+    flex-grow: 1;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.judge-popup-box {
+    width: 120px;
+    height: 192px;
+    border-width: 2px;
+    border-color: #333;
+    background-color: #fff;
+    margin: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.judge-popup-title {
+    -unity-text-align: upper-center;
+    font-size: 14px;
+    -unity-font-style: bold;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    letter-spacing: 6px;
+    background-color: #2b3a4e;
+    color: #fff;
+}
+
+.judge-popup-list {
+    flex-grow: 1;
+    flex-direction: column;
+    padding: 6px 10px;
+}
+
+.judge-popup-list-item {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 2px;
+    padding: 2px 4px;
+}
+
+.judge-popup-list-item:hover {
+    background-color: rgba(43, 58, 78, 0.15);
+    border-radius: 2px;
+}
+
+.judge-popup-list-item-label {
+    font-size: 7px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    min-height: 10px;
+    padding: 0;
+    margin: 0;
+    -unity-text-align: middle-left;
+}
+
+.judge-item-price {
+    font-size: 7px;
+    margin-left: auto;
+    flex-shrink: 0;
+    padding: 0;
+    margin: 0;
+    margin-left: auto;
+}
+
+.judge-item-sold {
+    opacity: 0.4;
+}
+
+#judge-order-panel {
+    width: 80px;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+.judge-panel {
+    background-color: #fff;
+    border-width: 2px;
+    border-color: #333;
+    padding: 8px;
+    margin: 8px;
+    overflow: hidden;
+}
+
+.judge-section-title {
+    font-size: 10px;
+    -unity-font-style: bold;
+    margin-bottom: 6px;
+}
+
+#judge-order-list {
+    flex-grow: 1;
+    flex-direction: column;
+    padding-top: 2px;
+}
+
+.judge-order-item {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1px;
+    padding: 1px 2px;
+}
+
+.judge-order-item:hover {
+    background-color: rgba(200, 80, 80, 0.15);
+    border-radius: 2px;
+}
+
+.judge-order-item-label {
+    font-size: 7px;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.judge-order-item-remove {
+    font-size: 7px;
+    color: #999;
+    margin: 0;
+    padding: 0;
+}
+
+#judge-footer {
+    border-top-width: 1px;
+    border-top-color: #999;
+    padding-top: 4px;
+    margin-top: 4px;
+}
+
+.judge-order-btn {
+    font-size: 8px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    padding: 4px 8px;
+    background-color: #2b3a4e;
+    color: #fff;
+    border-width: 1px;
+    border-color: #1a2636;
+    border-radius: 2px;
+}
+
+.judge-order-btn:hover {
+    background-color: #3d5068;
+}
+
+.judge-order-btn:active {
+    background-color: #1a2636;
+}
+
+.judge-order-btn:disabled {
+    background-color: #999;
+    border-color: #777;
+    opacity: 0.6;
+}

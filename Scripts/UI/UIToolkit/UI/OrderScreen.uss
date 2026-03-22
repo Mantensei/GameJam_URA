@@ -1,0 +1,189 @@
+* {
+    -unity-font: url("project://database/Assets/MantenseiAssets/Fonts/MaruMinya/x12y12pxMaruMinya.ttf");
+}
+
+.popup-overlay {
+    position: absolute;
+    top: 28px;
+    left: 0;
+    right: 0;
+    bottom: 40px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#order-body {
+    flex-grow: 1;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+#order-spacer {
+    width: 136px;
+    flex-shrink: 0;
+}
+
+#order-log {
+    flex-grow: 1;
+    align-self: flex-start;
+    align-items: center;
+}
+
+#order-judge {
+    width: 80px;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+.order-panel {
+    background-color: #fff;
+    border-width: 2px;
+    border-color: #333;
+    padding: 8px;
+    margin: 8px;
+    overflow: hidden;
+}
+
+.order-section-title {
+    font-size: 10px;
+    -unity-font-style: bold;
+    margin-bottom: 6px;
+}
+
+.order-footer {
+    -unity-text-align: middle-right;
+    font-size: 7px;
+    -unity-font-style: bold;
+    color: #555;
+    margin-top: auto;
+}
+
+#order-log-list {
+    flex-grow: 1;
+    flex-direction: column;
+    padding-top: 2px;
+}
+
+.order-log-item {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 0;
+    margin-bottom: 1px;
+    padding: 0;
+}
+
+.order-log-symbol {
+    font-size: 7px;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.order-log-price {
+    font-size: 7px;
+    flex-shrink: 0;
+    margin: 0;
+    margin-left: auto;
+    padding: 0;
+}
+
+#order-log-empty {
+    font-size: 7px;
+    color: #999;
+    -unity-text-align: middle-center;
+    flex-grow: 1;
+}
+
+#order-selected-list {
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.order-selected-item {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2px;
+}
+
+.order-selected-name {
+    font-size: 7px;
+    flex-shrink: 1;
+    min-height: 10px;
+    -unity-text-align: middle-left;
+}
+
+.order-selected-price {
+    font-size: 7px;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+#order-judge-footer {
+    border-top-width: 1px;
+    border-top-color: #999;
+    padding-top: 4px;
+}
+
+#order-total {
+    font-size: 7px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-right;
+    margin-bottom: 4px;
+}
+
+#order-confirm-btn {
+    font-size: 10px;
+    -unity-font-style: bold;
+    background-color: #2b3a4e;
+    color: #fff;
+    border-width: 2px;
+    border-color: #1a2a3a;
+    border-radius: 2px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+#order-confirm-btn:hover {
+    background-color: #3a5068;
+}
+
+#order-confirm-btn:active {
+    background-color: #1a2a3a;
+}
+
+#order-retry-btn {
+    font-size: 10px;
+    -unity-font-style: bold;
+    background-color: #555;
+    color: #fff;
+    border-width: 2px;
+    border-color: #444;
+    border-radius: 2px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-top: 4px;
+}
+
+#order-retry-btn:hover {
+    background-color: #777;
+}
+
+#order-retry-btn:active {
+    background-color: #333;
+}
+
+#order-empty-label {
+    font-size: 7px;
+    color: #999;
+    -unity-text-align: middle-center;
+    flex-grow: 1;
+}
+
+.order-selected-item:hover {
+    background-color: rgba(43, 58, 78, 0.15);
+    border-radius: 2px;
+}
+
+.order-footer:hover {
+    background-color: rgba(43, 58, 78, 0.15);
+    border-radius: 2px;
+}

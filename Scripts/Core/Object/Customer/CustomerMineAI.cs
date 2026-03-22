@@ -7,6 +7,12 @@ namespace GameJam_URA
 {
     public class CustomerMineAI : MonoBehaviour
     {
+        static readonly List<CustomerMineAI> instances = new List<CustomerMineAI>();
+        public static IReadOnlyList<CustomerMineAI> Instances => instances;
+
+        void OnEnable() => instances.Add(this);
+        void OnDisable() => instances.Remove(this);
+
         enum Phase { SitDown, Order, Eat, Reaction, Leave, Done }
 
         [Parent]
@@ -191,6 +197,7 @@ namespace GameJam_URA
             {
                 phaseEntered = true;
                 ShowBubble(Dish.Name, Dish.CategoryColor());
+                OrderLog.Add(Dish);
             }
 
             phaseTimer += Time.deltaTime;

@@ -16,6 +16,9 @@ namespace GameJam_URA.UI
         public MenuView Menu => Get<MenuView>();
         public CommentView Comment => Get<CommentView>();
         public RegisterView Register => Get<RegisterView>();
+        public OrderScreenView OrderScreen => Get<OrderScreenView>();
+        public JudgeScreenView JudgeScreen => Get<JudgeScreenView>();
+        public NovelPopupView NovelPopup => Get<NovelPopupView>();
 
         [GetComponent(HierarchyRelation.Children, true)]
         public SpeechBubbleManager SpeechBubble { get; private set; }

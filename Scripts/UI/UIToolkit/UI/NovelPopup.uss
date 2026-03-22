@@ -1,0 +1,27 @@
+* {
+    -unity-font: url("project://database/Assets/MantenseiAssets/Fonts/MaruMinya/x12y12pxMaruMinya.ttf");
+}
+
+.novel-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    padding: 0 8px;
+}
+
+.novel-textbox {
+    width: 100%;
+    height: 40px;
+    background-color: #fff;
+    border-width: 2px;
+    border-color: #3a7ca5;
+    padding: 6px 8px;
+}
+
+.novel-text {
+    font-size: 7px;
+    color: #333;
+    white-space: normal;
+    -unity-text-align: middle-left;
+}

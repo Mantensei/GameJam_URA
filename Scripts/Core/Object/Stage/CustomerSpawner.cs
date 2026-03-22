@@ -13,7 +13,7 @@ namespace GameJam_URA
         float elapsed;
         float judgeTimer;
         float judgeInterval = 1f;
-        float maxSpawnPercent = 0.5f;
+        float maxSpawnPercent = 0.25f;
 
         void Start()
         {
@@ -63,6 +63,7 @@ namespace GameJam_URA
                 .Where(x => x is Exit || x is Toilet)
                 .GetRandomElementOrDefault();
             var instance = Instantiate(prefab, spawnPoint.transform.position, Quaternion.identity);
+            instance.gameObject.AddComponent<SpriteOutlineHighlight>();
             var ai = instance.GetComponentInChildren<CustomerMineAI>();
             ai.Setup(dish, isDobon);
         }

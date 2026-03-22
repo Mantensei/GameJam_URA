@@ -1,0 +1,21 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="OrderScreen.uss" />
+
+    <ui:VisualElement name="order-overlay" class="popup-overlay">
+        <ui:VisualElement name="order-body">
+            <ui:VisualElement name="order-spacer" />
+            <ui:VisualElement name="order-log" class="order-panel">
+                <ui:Label text="提供履歴（調べたことのある客のメニューがわかるよ！）" class="order-section-title" />
+                <ui:VisualElement name="order-log-list" />
+            </ui:VisualElement>
+            <ui:VisualElement name="order-judge" class="order-panel">
+                <ui:Label text="注文" class="order-section-title" />
+                <ui:VisualElement name="order-selected-list" />
+                <ui:VisualElement name="order-judge-footer">
+                    <ui:Button name="order-confirm-btn" text="注文に進む" />
+                    <ui:Button name="order-retry-btn" text="もう一日調べる" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

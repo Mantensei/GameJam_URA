@@ -13,6 +13,9 @@ namespace GameJam_URA.UI
         Menu,
         Comment,
         Register,
+        OrderScreen,
+        JudgeScreen,
+        NovelPopup,
     }
 
     public interface IUIView : IMonoBehaviour

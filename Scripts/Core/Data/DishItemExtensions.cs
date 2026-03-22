@@ -23,9 +23,9 @@ namespace GameJam_URA
         {
             switch (dish.Category)
             {
-                case "メイン": return "☆";
-                case "サイド": return "⊿";
-                case "ドリンク": return "◇";
+                case "メイン": return "★";
+                case "サイド": return "▼";
+                case "ドリンク": return "◆";
                 default: return "・";
             }
         }

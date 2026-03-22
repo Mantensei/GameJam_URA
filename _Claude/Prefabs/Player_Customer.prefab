@@ -8,6 +8,66 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 719756117768596507, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
+      propertyPath: AnimationData2D.name
+      value: Mob_Walk
+      objectReference: {fileID: 0}
+    - target: {fileID: 719756117768596507, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
+      propertyPath: AnimationData2D.sourceClip
+      value: 
+      objectReference: {fileID: 7400000, guid: 0c1c71b5797e3e54ea2af179a040ba87, type: 2}
+    - target: {fileID: 719756117768596507, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: -1760912375278875752, guid: 07264f286f4760f45b4c47c52fdbfee5, type: 3}
+    - target: {fileID: 719756117768596507, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[1].sprite
+      value: 
+      objectReference: {fileID: -4565917701723453159, guid: 07264f286f4760f45b4c47c52fdbfee5, type: 3}
+    - target: {fileID: 719756117768596507, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[2].sprite
+      value: 
+      objectReference: {fileID: -4525498638775943592, guid: 07264f286f4760f45b4c47c52fdbfee5, type: 3}
+    - target: {fileID: 719756117768596507, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[3].sprite
+      value: 
+      objectReference: {fileID: 5742141246813970173, guid: 07264f286f4760f45b4c47c52fdbfee5, type: 3}
+    - target: {fileID: 719756117768596507, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
+      propertyPath: AnimationData2D.frames.Array.data[4].sprite
+      value: 
+      objectReference: {fileID: 5742141246813970173, guid: 07264f286f4760f45b4c47c52fdbfee5, type: 3}
+    - target: {fileID: 1553281165426280596, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
+      propertyPath: _animations.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553281165426280596, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
+      propertyPath: _animations.Array.data[0].name
+      value: Mob_Idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553281165426280596, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
+      propertyPath: _animations.Array.data[0].sourceClip
+      value: 
+      objectReference: {fileID: 7400000, guid: 50fe0560b68e1b34b93609356edecea0, type: 2}
+    - target: {fileID: 1553281165426280596, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
+      propertyPath: _animations.Array.data[0].frames.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 8508038739868986698, guid: 07264f286f4760f45b4c47c52fdbfee5, type: 3}
+    - target: {fileID: 1553281165426280596, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
+      propertyPath: _animations.Array.data[0].frames.Array.data[1].sprite
+      value: 
+      objectReference: {fileID: -6143278964292522691, guid: 07264f286f4760f45b4c47c52fdbfee5, type: 3}
+    - target: {fileID: 1553281165426280596, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
+      propertyPath: _animations.Array.data[0].frames.Array.data[2].sprite
+      value: 
+      objectReference: {fileID: -7298735942899353569, guid: 07264f286f4760f45b4c47c52fdbfee5, type: 3}
+    - target: {fileID: 1553281165426280596, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
+      propertyPath: _animations.Array.data[0].frames.Array.data[3].sprite
+      value: 
+      objectReference: {fileID: 5674863782072083904, guid: 07264f286f4760f45b4c47c52fdbfee5, type: 3}
+    - target: {fileID: 1553281165426280596, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
+      propertyPath: _animations.Array.data[0].frames.Array.data[4].sprite
+      value: 
+      objectReference: {fileID: 5674863782072083904, guid: 07264f286f4760f45b4c47c52fdbfee5, type: 3}
     - target: {fileID: 3357381761120006756, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -57,16 +117,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4757669392081153112, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5674863782072083904, guid: 07264f286f4760f45b4c47c52fdbfee5, type: 3}
+    - target: {fileID: 4757669392081153112, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4757669392081153112, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4757669392081153112, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4757669392081153112, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
       propertyPath: m_SortingOrder
@@ -83,59 +147,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3639089861101910639, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6564021340217867200}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
---- !u!1 &64998208804405235 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3639089861101910639, guid: 2aed676b61c82f640b5838d125421dbd, type: 3}
-  m_PrefabInstance: {fileID: 3631677510873695644}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &6564021340217867200
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 64998208804405235}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 2}
-  m_EdgeRadius: 0

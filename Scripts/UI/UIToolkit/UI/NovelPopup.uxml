@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="NovelPopup.uss" />
+
+    <ui:VisualElement name="novel-overlay" class="novel-overlay" picking-mode="Ignore">
+        <ui:VisualElement name="novel-textbox" class="novel-textbox">
+            <ui:Label name="novel-text" text="" class="novel-text" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

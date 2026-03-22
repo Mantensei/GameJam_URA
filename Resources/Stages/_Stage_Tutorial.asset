@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameJam_URA.StageData
   stageId: 0
   timeLimit: 60
+  requiredOrders: 3
   customerPrefabs:
   - {fileID: 1552000818523828337, guid: d255fee9cc46ffe4c9318df687b1ed12, type: 3}
-  dobonRate: 0.3
+  dobonRate: 0.35

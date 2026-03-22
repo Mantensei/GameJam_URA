@@ -10,6 +10,7 @@ namespace GameJam_URA
     {
         [SerializeField] StageId stageId;
         [SerializeField] float timeLimit = 60f;
+        [SerializeField] int requiredOrders = 3;
         [SerializeField] URA_PlayerReferenceHub[] customerPrefabs;
         [SerializeField, Range(0f, 1f)] float dobonRate = 0.3f;
 
@@ -28,6 +29,7 @@ namespace GameJam_URA
         public float TimeLimit => timeLimit;
         public int DobonPenalty => stageId.DobonPenalty();
         public int DobonCount => dobonCount;
+        public int RequiredOrders => requiredOrders;
         public List<ICommentItem> CommentList => builtCommentList;
         public URA_PlayerReferenceHub[] CustomerPrefabs => customerPrefabs;
 
@@ -38,6 +40,8 @@ namespace GameJam_URA
 
         public List<IUraTask> Normas => builtNormas;
         public List<IUraTask> Dobons => builtDobons;
+
+        public void ResetMenu() => builtMenuList = null;
 
         public List<IDishItem> MenuList
         {

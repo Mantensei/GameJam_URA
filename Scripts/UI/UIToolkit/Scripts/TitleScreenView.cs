@@ -29,6 +29,8 @@ namespace GameJam_URA.UI
             btnStart.clicked += OnStartPressed;
             btnHowto.clicked += () => TogglePopup(howtoPopup);
             btnCredit.clicked += () => TogglePopup(creditPopup);
+
+            UnityEngine.Time.timeScale = 0f;
         }
 
         void TogglePopup(VisualElement popup)
@@ -45,7 +47,7 @@ namespace GameJam_URA.UI
             activePopup = popup;
         }
 
-        void OnStartPressed()
+        public void OnStartPressed()
         {
             UnityEngine.Time.timeScale = 1f;
             Hide();

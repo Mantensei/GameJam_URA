@@ -24,6 +24,18 @@ namespace GameJam_URA.UI
         Dictionary<IDishItem, VisualElement> _menuItemMap;
         Dictionary<IDishItem, MarkState> _menuItemStates;
 
+        public string GetMarkPrefix(IDishItem dish)
+        {
+            if (_menuItemStates == null) return "　";
+            if (!_menuItemStates.TryGetValue(dish, out var state)) return "　";
+            return state switch
+            {
+                MarkState.Order => "○",
+                MarkState.Dobon => "×",
+                _ => "　",
+            };
+        }
+
         List<IDishItem> _menuItems;
         public IReadOnlyList<IDishItem> MenuItems => _menuItems;
 
@@ -32,8 +44,31 @@ namespace GameJam_URA.UI
             var stage = GameManager.Instance.CurrentStage;
             _menuItems = stage.MenuList;
             _menuItemMap = new Dictionary<IDishItem, VisualElement>();
+            bool wasNull = _menuItemStates == null;
             _menuItemStates ??= new Dictionary<IDishItem, MarkState>();
+            MantenseiDebug.DebugFileLogger.Log("transition", "MenuView.InitData",
+                $"wasNull={wasNull} statesCount={_menuItemStates.Count} menuItemsCount={_menuItems.Count}");
         }
+
+        public Dictionary<IDishItem, int> ExportMarks()
+        {
+            var result = new Dictionary<IDishItem, int>();
+            if (_menuItemStates == null) return result;
+            foreach (var kvp in _menuItemStates)
+                result[kvp.Key] = (int)kvp.Value;
+            return result;
+        }
+
+        public void ImportMarks(IReadOnlyDictionary<IDishItem, int> marks)
+        {
+            _menuItemStates = new Dictionary<IDishItem, MarkState>();
+            foreach (var kvp in marks)
+                _menuItemStates[kvp.Key] = (MarkState)kvp.Value;
+            MantenseiDebug.DebugFileLogger.Log("transition", "MenuView.ImportMarks",
+                $"imported {_menuItemStates.Count} marks");
+        }
+
+        public void ClearMarks() => _menuItemStates = null;
     }
 
     #endregion
@@ -44,10 +79,20 @@ namespace GameJam_URA.UI
     {
         public event Action<IDishItem> OnOrderSelected;
 
-        protected override void OnShown()
+        void Start()
+        {
+            BuildMenu();
+        }
+
+        public void BuildMenu()
         {
             InitData();
             InitBehavior();
+        }
+
+        protected override void OnShown()
+        {
+            BuildMenu();
         }
 
         const int FavorPerSafe = 10;
@@ -90,16 +135,14 @@ namespace GameJam_URA.UI
 
         void InitBehavior()
         {
-            var leftColumn = Root.Q<VisualElement>(className: "menu-list-left");
-            var rightColumn = Root.Q<VisualElement>(className: "menu-list-right");
-            int half = (_menuItems.Count + 1) / 2;
+            var listContainer = Root.Q<VisualElement>("menu-list-container");
+            listContainer.Clear();
 
             for (int i = 0; i < _menuItems.Count; i++)
             {
                 var element = CreateMenuItemElement(_menuItems[i]);
                 _menuItemMap[_menuItems[i]] = element;
-                var column = i < half ? leftColumn : rightColumn;
-                column.Add(element);
+                listContainer.Add(element);
             }
 
             foreach (var menuItem in _menuItems)
@@ -126,13 +169,42 @@ namespace GameJam_URA.UI
                 });
             }
 
-            Root.Q<Label>("menu-close-btn").RegisterCallback<ClickEvent>(_ => Hide());
+            Root.Q("menu-overlay").pickingMode = PickingMode.Ignore;
 
-            var overlay = Root.Q("menu-overlay");
-            overlay.RegisterCallback<ClickEvent>(e =>
+            Root.RegisterCallback<GeometryChangedEvent>(_ => DumpLayoutDebug());
+        }
+
+        void DumpLayoutDebug()
+        {
+            MantenseiDebug.DebugFileLogger.Clear("menu_layout");
+
+            var listContainer = Root.Q<VisualElement>("menu-list-container");
+            var popup = Root.Q<VisualElement>("menu-popup");
+            var overlay = Root.Q<VisualElement>("menu-overlay");
+
+            MantenseiDebug.DebugFileLogger.Log("menu_layout", "OVERLAY",
+                $"layout={overlay.layout} worldBound={overlay.worldBound} picking={overlay.pickingMode}");
+            MantenseiDebug.DebugFileLogger.Log("menu_layout", "POPUP",
+                $"layout={popup.layout} worldBound={popup.worldBound} picking={popup.pickingMode}");
+            MantenseiDebug.DebugFileLogger.Log("menu_layout", "CONTAINER",
+                $"layout={listContainer.layout} worldBound={listContainer.worldBound} picking={listContainer.pickingMode}");
+
+            MantenseiDebug.DebugFileLogger.Log("menu_layout", "SCREEN",
+                $"Screen={Screen.width}x{Screen.height} panel.scale={Root.panel.visualTree.worldTransform}");
+
+            foreach (var kvp in _menuItemMap)
             {
-                if (e.target == overlay) Hide();
-            });
+                var item = kvp.Value;
+                var nameLabel = item.Q<Label>(className: ItemLabelClass);
+                var priceLabel = item.Q<Label>(className: ItemPriceClass);
+
+                MantenseiDebug.DebugFileLogger.Log("menu_layout", "ITEM",
+                    $"{kvp.Key.Name} | layout={item.layout} worldBound={item.worldBound} contentRect={item.contentRect} picking={item.pickingMode} padding=[T:{item.resolvedStyle.paddingTop},B:{item.resolvedStyle.paddingBottom},L:{item.resolvedStyle.paddingLeft},R:{item.resolvedStyle.paddingRight}] margin=[T:{item.resolvedStyle.marginTop},B:{item.resolvedStyle.marginBottom}] border=[T:{item.resolvedStyle.borderTopWidth},B:{item.resolvedStyle.borderBottomWidth}]");
+                MantenseiDebug.DebugFileLogger.Log("menu_layout", "  NAME",
+                    $"layout={nameLabel.layout} worldBound={nameLabel.worldBound} contentRect={nameLabel.contentRect} fontSize={nameLabel.resolvedStyle.fontSize} padding=[T:{nameLabel.resolvedStyle.paddingTop},B:{nameLabel.resolvedStyle.paddingBottom}] margin=[T:{nameLabel.resolvedStyle.marginTop},B:{nameLabel.resolvedStyle.marginBottom}] unityTextAlign={nameLabel.resolvedStyle.unityTextAlign}");
+                MantenseiDebug.DebugFileLogger.Log("menu_layout", "  PRICE",
+                    $"layout={priceLabel.layout} worldBound={priceLabel.worldBound} contentRect={priceLabel.contentRect} fontSize={priceLabel.resolvedStyle.fontSize} padding=[T:{priceLabel.resolvedStyle.paddingTop},B:{priceLabel.resolvedStyle.paddingBottom}] margin=[T:{priceLabel.resolvedStyle.marginTop},B:{priceLabel.resolvedStyle.marginBottom}]");
+            }
         }
 
         void SetMark(IDishItem item, MarkState state)

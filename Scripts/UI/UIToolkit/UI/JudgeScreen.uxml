@@ -1,0 +1,19 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="JudgeScreen.uss" />
+
+    <ui:VisualElement name="judge-overlay" class="popup-overlay">
+        <ui:VisualElement name="judge-body">
+            <ui:VisualElement name="judge-menu-popup" class="judge-popup-box">
+                <ui:Label name="judge-menu-title" text="メニュー" class="judge-popup-title" />
+                <ui:VisualElement name="judge-menu-list" class="judge-popup-list" />
+            </ui:VisualElement>
+            <ui:VisualElement name="judge-order-panel" class="judge-panel">
+                <ui:Label text="注文一覧" class="judge-section-title" />
+                <ui:VisualElement name="judge-order-list" />
+                <ui:VisualElement name="judge-footer">
+                    <ui:Button name="judge-order-btn" text="注文する" class="judge-order-btn" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

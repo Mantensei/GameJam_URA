@@ -1,7 +1,11 @@
+using System.Collections;
+using GameJam_URA;
 using GameJam_URA.UI;
+using MantenseiDebug;
 using MantenseiLib;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace GameJam_URA.Prototype
@@ -17,6 +21,13 @@ namespace GameJam_URA.Prototype
         {
             RestaurantInputActions.SetActive(true);
             InitUIBindings();
+            new CustomerHoverManager(gameObject);
+
+            DebugFileLogger.Log("transition", "Start", $"TransitionType={StageTransitionData.TransitionType}");
+            if (StageTransitionData.TransitionType != StageTransitionType.None)
+            {
+                StartCoroutine(ApplyTransitionNextFrame());
+            }
         }
 
         void OnDestroy()
@@ -27,13 +38,24 @@ namespace GameJam_URA.Prototype
 
         float _uiMoveDirection;
         float _elapsed;
+        bool _timeUp;
 
         void Update()
         {
             var input = RestaurantInputActions.Instance;
 
-            _elapsed += Time.deltaTime;
             var stage = GameManager.Instance.CurrentStage;
+
+            if (!_timeUp)
+            {
+                _elapsed += Time.deltaTime;
+                if (_elapsed >= stage.TimeLimit)
+                {
+                    _timeUp = true;
+                    OnTimeUp();
+                }
+            }
+
             UIViewHub.Instance.GameHUD.UpdateTime(stage.TimeLimit - _elapsed, stage.TimeLimit);
 
             var h = input.Move.ReadValue<float>();
@@ -57,6 +79,11 @@ namespace GameJam_URA.Prototype
             //     TryComment();
         }
 
+        void OnTimeUp()
+        {
+            UIViewHub.Instance.OrderScreen.Show();
+        }
+
         void TryOrder()
         {
             var menu = UIViewHub.Instance.Menu;
@@ -66,6 +93,22 @@ namespace GameJam_URA.Prototype
                 menu.Show();
         }
 
+        IEnumerator ApplyTransitionNextFrame()
+        {
+            yield return null;
+            DebugFileLogger.Log("transition", "ApplyTransition", $"type={StageTransitionData.TransitionType}");
+            if (StageTransitionData.TransitionType == StageTransitionType.Retry
+                && StageTransitionData.SavedMarks != null)
+            {
+                DebugFileLogger.Log("transition", "ApplyTransition", $"ImportMarks count={StageTransitionData.SavedMarks.Count}");
+                var menu = UIViewHub.Instance.Menu;
+                menu.ImportMarks(StageTransitionData.SavedMarks);
+                menu.BuildMenu();
+            }
+            UIViewHub.Instance.TitleScreen.OnStartPressed();
+            StageTransitionData.Clear();
+        }
+
         // void TryInteract()
         // {
         //     Interactor?.Interact();
@@ -73,27 +116,20 @@ namespace GameJam_URA.Prototype
 
         void TryInspectCustomer()
         {
-            var cam = Camera.main;
-            var worldPos = cam.ScreenToWorldPoint(Pointer.current.position.ReadValue());
-            var hit = Physics2D.Raycast(worldPos, Vector2.zero);
-            if (!hit.collider) return;
-
-            var ai = hit.collider.GetComponentInChildren<CustomerMineAI>();
+            var ai = CustomerHoverManager.Instance?.HoveredCustomer;
             if (!ai || ai.Dish == null) return;
-
             if (Vector2.Distance(transform.position, ai.transform.position) > 3f) return;
 
             var dish = ai.Dish;
-            var symbol = dish.CategorySymbol();
+            OrderLog.Reveal(dish);
             var offset = new Vector3(0f, 1f, 0f);
-            var bubble = UIViewHub.Instance.SpeechBubble.Show(new SpeechBubbleCommand
+            UIViewHub.Instance.SpeechBubble.Show(new SpeechBubbleCommand
             {
                 Parent = transform,
                 Text = $"(『{dish.Name}』のニオイがする...)",
                 Offset = offset,
                 TextColor = dish.CategoryColor(),
             });
-            // bubble.transform.SetParent(_ura_hub.transform);
         }
 
         // void TryComment()
@@ -108,6 +144,11 @@ namespace GameJam_URA.Prototype
         void InitUIBindings()
         {
             UIViewHub.Instance.Comment.OnCommentSelected += OnCommentSelected;
+            UIViewHub.Instance.OrderScreen.onOrderConfirmed += OnOrderConfirmed;
+            UIViewHub.Instance.OrderScreen.onRetry += OnRetry;
+            UIViewHub.Instance.JudgeScreen.onCleared += OnCleared;
+            UIViewHub.Instance.JudgeScreen.onGameOver += OnGameOver;
+            UIViewHub.Instance.TitleScreen.onStartClicked += OnGameStart;
 
             var hud = UIViewHub.Instance.GameHUD;
             hud.KeyLeft.RegisterCallback<PointerDownEvent>(_ => _uiMoveDirection = -1f);
@@ -122,9 +163,49 @@ namespace GameJam_URA.Prototype
         void CleanupUIBindings()
         {
             UIViewHub.Instance.Comment.OnCommentSelected -= OnCommentSelected;
+            UIViewHub.Instance.OrderScreen.onOrderConfirmed -= OnOrderConfirmed;
+            UIViewHub.Instance.OrderScreen.onRetry -= OnRetry;
+            UIViewHub.Instance.JudgeScreen.onCleared -= OnCleared;
+            UIViewHub.Instance.JudgeScreen.onGameOver -= OnGameOver;
+            UIViewHub.Instance.TitleScreen.onStartClicked -= OnGameStart;
             _uiMoveDirection = 0f;
         }
 
         void OnCommentSelected(string comment) => _ura_hub.Commenter.TrySay(comment);
+
+        void OnOrderConfirmed()
+        {
+            UIViewHub.Instance.JudgeScreen.Show();
+        }
+
+        void OnRetry()
+        {
+            var marks = UIViewHub.Instance.Menu.ExportMarks();
+            DebugFileLogger.Log("transition", "OnRetry", $"ExportMarks count={marks.Count}");
+            foreach (var kvp in marks)
+                DebugFileLogger.Log("transition", "OnRetry", $"  {kvp.Key.Name} = {kvp.Value}");
+            StageTransitionData.SetupRetry(marks);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        void OnGameStart()
+        {
+            if (StageTransitionData.TransitionType != StageTransitionType.None) return;
+            StageTransitionData.SetupNewGame();
+            var stage = GameManager.Instance.CurrentStage;
+            stage.ResetMenu();
+            GameManager.Instance.LoadStage(stage.Id);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        void OnCleared()
+        {
+            UIViewHub.Instance.TitleScreen.Show();
+        }
+
+        void OnGameOver()
+        {
+            UIViewHub.Instance.TitleScreen.Show();
+        }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 namespace GameJam_URA.UI
 {
+    [System.Obsolete]
     public class RegisterView : UIViewBase
     {
         public override UIViewType ViewType => UIViewType.Register;

@@ -2,6 +2,7 @@
     -unity-font: url("project://database/Assets/MantenseiAssets/Fonts/MaruMinya/x12y12pxMaruMinya.ttf");
 }
 
+/* === 旧スタイル（中央オーバーレイ表示） ===
 .popup-overlay {
     position: absolute;
     top: 28px;
@@ -19,6 +20,36 @@
     border-color: #333;
     border-radius: 4px;
     overflow: hidden;
+}
+
+#menu-overlay {
+    background-color: rgba(0, 0, 0, 0.95);
+}
+=== 旧スタイルここまで === */
+
+.popup-overlay {
+    position: absolute;
+    top: 28px;
+    left: 0;
+    right: 0;
+    bottom: 40px;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.popup-box {
+    flex-grow: 1;
+    width: 120px;
+    height: auto;
+    border-width: 2px;
+    border-color: #333;
+    background-color: #fff;
+    margin: 8px;
+    overflow: hidden;
+}
+
+#menu-overlay {
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .popup-title {
@@ -50,21 +81,21 @@
 .popup-list-item {
     flex-direction: row;
     align-items: center;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
+    padding: 2px 4px;
 }
 
 .popup-list-item-label {
     font-size: 7px;
     flex-shrink: 0;
     white-space: nowrap;
+    min-height: 10px;
     padding: 0;
     margin: 0;
+    -unity-text-align: middle-left;
 }
 
-#menu-overlay {
-    background-color: rgba(0, 0, 0, 0.95);
-}
-
+/* === 旧スタイル（本デザイン・2カラム） ===
 #menu-book {
     flex-grow: 1;
     flex-direction: row;
@@ -102,6 +133,16 @@
 .menu-list-right {
     padding-left: 6px;
     padding-right: 6px;
+}
+=== 旧スタイルここまで === */
+
+#menu-list-container {
+    flex-grow: 1;
+    padding: 6px 10px;
+}
+
+#menu-divider {
+    display: none;
 }
 
 .menu-item-price {

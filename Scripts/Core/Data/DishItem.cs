@@ -20,10 +20,7 @@ namespace GameJam_URA
             Category = category;
         }
 
-        public void Complete()
-        {
-            IsCompleted = true;
-        }
+        public void Complete() => IsCompleted = true;
 
         public static DishItem FromCsvRow(CsvRow row)
         {

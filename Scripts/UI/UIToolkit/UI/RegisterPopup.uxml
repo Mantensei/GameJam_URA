@@ -2,26 +2,19 @@
     <Style src="RegisterPopup.uss" />
 
     <ui:VisualElement name="register-overlay" class="popup-overlay">
-        <ui:VisualElement name="register-book" class="book">
-            <ui:VisualElement name="register-cover-left" class="book-cover book-cover-left" />
-            <ui:VisualElement name="register-pages" class="book-pages">
-                <ui:Label name="register-title" text="レジ" class="book-title" />
-                <ui:VisualElement class="book-content">
-                    <ui:VisualElement name="register-body">
-                        <ui:VisualElement name="register-content">
-                            <ui:VisualElement name="register-order-summary" />
-                            <ui:VisualElement name="register-list">
-                                <ui:Label text="・お会計" name="register-checkout-btn" class="register-list-item" />
-                            </ui:VisualElement>
-                        </ui:VisualElement>
-                        <ui:VisualElement name="register-character">
-                            <ui:VisualElement name="register-silhouette" />
-                        </ui:VisualElement>
-                    </ui:VisualElement>
-                </ui:VisualElement>
-                <ui:Label name="register-close-btn" text="閉じる(Escape)" class="book-footer" />
+        <ui:VisualElement name="register-body">
+            <ui:VisualElement name="register-spacer" />
+            <ui:VisualElement name="register-log-section" class="register-panel">
+                <ui:Label text="注文履歴" class="register-section-title" />
+                <ui:VisualElement name="register-order-summary" />
             </ui:VisualElement>
-            <ui:VisualElement name="register-cover-right" class="book-cover book-cover-right" />
+            <ui:VisualElement name="register-order-section" class="register-panel">
+                <ui:Label text="注文aiueo" class="register-section-title" />
+                <ui:VisualElement name="register-list">
+                    <ui:Label text="・お会計" name="register-checkout-btn" class="register-list-item" />
+                </ui:VisualElement>
+                <ui:Label name="register-close-btn" text="閉じる(Escape)" class="register-footer" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
